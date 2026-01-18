@@ -4,9 +4,10 @@ import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 import Stripe from "stripe";
+import { serenaRooms } from "./serenaRooms.ts";
 
-const eleven = new ElevenLabsClient({
-  apiKey: process.env.ELEVENLABS_API_KEY!,
+const eleven = new ElevenlabsClient({
+  apiKey: process.env.XI_API_KEY!,
 });
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-12-15.clover",
