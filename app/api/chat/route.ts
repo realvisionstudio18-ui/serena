@@ -2,21 +2,18 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
-import Stripe from "stripe";.
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 import { serenaRooms } from "./serenaRooms";
 
 export const runtime = "nodejs";
+/ eslint-disable-next-line @typescript-eslint/no-var-requires
+const Stripe = require("stripe");
 
 const STARTER_PRODUCT_ID = "prod_TjWbEQhYkUd9JR";
 const PLUS_PRODUCT_ID = "prod_TrxBnvzTvCd9wW";
 
 const eleven = new ElevenLabsClient({
   apiKey: process.env.XI_API_KEY!,
-});
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-12-15.clover",
 });
 //@ts-ignore
 const openai = new OpenAI({
