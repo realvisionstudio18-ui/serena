@@ -1,4 +1,3 @@
-export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
@@ -6,6 +5,8 @@ import { createClient } from "@supabase/supabase-js";
 import Stripe from "stripe";.
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 import { serenaRooms } from "./serenaRooms";
+
+export const runtime = "nodejs";
 
 const STARTER_PRODUCT_ID = "prod_TjWbEQhYkUd9JR";
 const PLUS_PRODUCT_ID = "prod_TrxBnvzTvCd9wW";
