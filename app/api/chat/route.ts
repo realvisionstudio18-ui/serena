@@ -2,13 +2,17 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
-import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 import Stripe from "stripe";
-import { serenaRooms } from "./serenaRooms.ts";
+import { serenaRooms } from "./serenaRooms";
+import { ElevenLabsClient } from "elevenlabs";
 
-const eleven = new ElevenlabsClient({
+const STARTER_PRODUCT_ID = "prod_TjWbEQhYkUd9JR";
+const PLUS_PRODUCT_ID = "prod_TrxBnvzTvCd9wW";
+
+const eleven = new ElevenLabsClient({
   apiKey: process.env.XI_API_KEY!,
 });
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-12-15.clover",
 });
@@ -19,6 +23,28 @@ const openai = new OpenAI({
 const supabase = createClient(
   process.env.SUPABASE_URL!,
   process.env.SUPABASE_ANON_KEY!);
+async function elevenTTS(text: string) {
+  const r = await fetch(
+    "https://api.elevenlabs.io/v1/text-to-speech/" + process.env.ELEVEN_VOICE_ID,
+    {
+      method: "POST",
+      headers: {
+        "xi-api-key": process.env.XI_API_KEY!,
+        "Content-Type": "application/json",
+        Accept: "audio/mpeg",
+      },
+      body: JSON.stringify({
+        text,
+        model_id: process.env.ELEVEN_MODEL_ID || "eleven_multilingual_v2",
+        voice_settings: { stability: 0.4, similarity_boost: 0.8 },
+      }),
+    }
+  );
+
+  if (!r.ok) throw new Error("ElevenLabs TTS failed");
+  const buf = Buffer.from(await r.arrayBuffer());
+  return buf.toString("base64");
+}
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -40,9 +66,16 @@ const { data: usage } = await supabase
 let freeUsed = usage?.free_used ?? 0;
 
 if (freeUsed >= FREE_LIMIT) {
+  const plan = body.plan ?? "starter";
+
+  const priceId =
+    plan === "plus"
+      ? process.env.STRIPE_PRICE_PLUS!
+      : process.env.STRIPE_PRICE_MONTHLY!;
+
   const session = await stripe.checkout.sessions.create({
     mode: "subscription",
-    line_items: [{ price: process.env.STRIPE_PRICE_MONTHLY!, quantity: 1 }],
+    line_items: [{ price: priceId, quantity: 1 }],
     success_url: (process.env.APP_URL || "") + "/success?uid=" + uid,
     cancel_url: (process.env.APP_URL || ""),
     metadata: { uid },
@@ -51,8 +84,7 @@ if (freeUsed >= FREE_LIMIT) {
   return NextResponse.json({
     locked: true,
     checkoutUrl: session.url,
-    reply:
-      "Ai folosit cele 7 mesaje gratuite. Deblochează acces nelimitat (59 lei/luna) ca să continuăm aici, și mutăm conversația pe WhatsApp privat.",
+    reply: "Ai folosit cele 8 mesaje gratuite. Deblochează accesul ca să continuăm.",
   });
 }
 await supabase
