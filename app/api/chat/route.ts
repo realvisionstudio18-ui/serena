@@ -1,6 +1,6 @@
 
 import { NextResponse } from "next/server";
-import OpenAI from "openai";
+const OpenAI = require("openai");
 import { createClient } from "@supabase/supabase-js";
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 import { serenaRooms } from "./serenaRooms";
