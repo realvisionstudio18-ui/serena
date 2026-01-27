@@ -4,7 +4,7 @@ import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
 import Stripe from "stripe";.
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
-import { serenaRooms } from "./serenaRooms";
+import { serenaRooms } from "./serenaRooms.js";
 
 const STARTER_PRODUCT_ID = "prod_TjWbEQhYkUd9JR";
 const PLUS_PRODUCT_ID = "prod_TrxBnvzTvCd9wW";
