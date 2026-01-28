@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 const OpenAI = require("openai");
 import { createClient } from "@supabase/supabase-js";
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
-import { serenaRooms } from "./serenaRooms";
+
 
 export const runtime = "nodejs";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
