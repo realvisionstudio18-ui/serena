@@ -4,31 +4,8 @@ export const serenaRooms = {
     name: "Camera Liniștii",
     icon: "🕯️",
     law: "Legea Vibrației",
-    description: `Când interiorul meu se liniștește, realitatea exterioară începe să se alinieze de la sine.`,
-    message: `Hei…
-Ai ajuns într-un loc sigur.
-Aici nu trebuie să te grăbești.
-Aici nu trebuie să demonstrezi nimic.
-Aici poți lăsa lucrurile să se așeze.
-Nu ești prea târziu.
-Nu ești „în urmă”.
-Nu ești mai puțin decât alții.
-
-Tot ce ești acum este exact unde trebuie să fii pentru următorul pas.
-Unele schimbări nu vin prin forță.
-Vin atunci când interiorul se liniștește.
-Când mintea nu mai împinge, viața începe să curgă.
-Lucrurile bune nu se pierd.
-Ele se așază.
-    affirmation: 
-Chiar dacă nu văd încă toate rezultatele,
-ce e bun pentru mine deja se pregătește.
-Pașii mei contează.
-Prezența mea contează.
-Când interiorul meu se liniștește,
-lucrurile din exterior încep să se alinieze natural.`,
-  }
-};
+    description: "Când interiorul meu se liniștește, realitatea exterioară începe să se alinieze de la sine."
+}
 claritate: {
   id: "claritate",
   name: "Camera Clarității",
