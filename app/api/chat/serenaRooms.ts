@@ -4,9 +4,8 @@ export const serenaRooms = {
     name: "Camera Liniștii",
     icon: "🕯️",
     law: "Legea Vibrației",
-    description: Când interiorul meu se liniștește, realitatea exterioară începe să se alinieze de la sine.,
-    message: `
-Hei…
+    description: `Când interiorul meu se liniștește, realitatea exterioară începe să se alinieze de la sine.`,
+    message: `Hei…
 Ai ajuns într-un loc sigur.
 Aici nu trebuie să te grăbești.
 Aici nu trebuie să demonstrezi nimic.
@@ -27,8 +26,7 @@ ce e bun pentru mine deja se pregătește.
 Pașii mei contează.
 Prezența mea contează.
 Când interiorul meu se liniștește,
-lucrurile din exterior încep să se alinieze natural.
-    `,
+lucrurile din exterior încep să se alinieze natural.`,
   }
 };
 claritate: {
