@@ -21,15 +21,14 @@ Vin atunci când interiorul se liniștește.
 Când mintea nu mai împinge, viața începe să curgă.
 Lucrurile bune nu se pierd.
 Ele se așază.
-    `,
-    affirmation: `
+    affirmation: 
 Chiar dacă nu văd încă toate rezultatele,
 ce e bun pentru mine deja se pregătește.
 Pașii mei contează.
 Prezența mea contează.
 Când interiorul meu se liniștește,
 lucrurile din exterior încep să se alinieze natural.
-    `
+    `,
   }
 };
 claritate: {
