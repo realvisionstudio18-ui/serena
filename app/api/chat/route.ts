@@ -8,6 +8,9 @@ import { serenaRooms } from "./serenaRooms";
 export const runtime = "nodejs";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Stripe = require("stripe");
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2023-10-16",
+});
 
 const STARTER_PRODUCT_ID = "prod_TjWbEQhYkUd9JR";
 const PLUS_PRODUCT_ID = "prod_TrxBnvzTvCd9wW";
