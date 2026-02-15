@@ -74,17 +74,10 @@ export default function Home() {
     }
   }
 
-  <div
-  style={{
-    minHeight: "100vh",
-    background: "radial-gradient(1200px 600px at 20% 10%, rgba(59,130,246,.35), transparent 55%), radial-gradient(800px 500px at 80% 30%, rgba(34,197,94,.25), transparent 55%), #050b1a",
-    padding: "16px",
-    display: "flex",
-    justifyContent: "center"
-  }}
-
+  return (
+    <div style={{ minHeight: "100vh", background: "radial-gradient(1200px 600px at 20% 10%, rgba(59,130,246,.35), transparent 55%), radial-gradient(900px 500px at 90% 20%, rgba(34,197,94,.18), transparent 55%), #050814" }}>
       {/* Top bar */}
-      <div style={{ maxWidth: 480, margin: "0 auto", padding: "22px 18px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "22px 18px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 34, height: 34, borderRadius: 12, background: "linear-gradient(135deg, rgba(59,130,246,1), rgba(34,197,94,1))", boxShadow: "0 0 35px rgba(59,130,246,.35)" }} />
           <div>

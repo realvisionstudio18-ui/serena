@@ -24,3 +24,21 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.upgradeWrap{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  padding: 0 12px;
+  z-index: 9999;
+}
+
+.upgradeBtn{
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+}
