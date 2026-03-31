@@ -1,328 +1,242 @@
 "use client";
-
-import { useEffect, useMemo, useState } from "react";
-
-type Msg = { from: "serena" | "user"; text: string };
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
-  const [messages, setMessages] = useState<Msg[]>([
-    { from: "serena", text: "Hei… Sunt aici pentru tine. Nu ești singur." },
-  ]);
+  const [messages, setMessages] = useState<{ from: string; text: string }[]>([]);
   const [input, setInput] = useState("");
-  const [wantAudio, setWantAudio] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [userId, setUserId] = useState<string>("");
-  const [checkoutUrl, setCheckoutUrl] = useState<string>("");
+  const [wantAudio, setWantAudio] = useState(false);
+  const [uid, setUid] = useState("");
   const [locked, setLocked] = useState(false);
-
-  const whatsappUrl = useMemo(
-    () =>
-      "https://wa.me/40722335853?text=" +
-      encodeURIComponent("Hei, vreau să continui cu Serena."),
-    []
-  );
+  const [checkoutUrl, setCheckoutUrl] = useState("");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let uid = localStorage.getItem("serena_user_id");
-    if (!uid) {
-      uid = crypto.randomUUID();
-      localStorage.setItem("serena_user_id", uid);
+    let stored = localStorage.getItem("serena_uid");
+    if (!stored) {
+      stored = crypto.randomUUID();
+      localStorage.setItem("serena_uid", stored);
     }
-    setUserId(uid);
+    setUid(stored);
   }, []);
 
-  async function send() {
-    const text = input.trim();
-    if (!text || loading) return;
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
-    setMessages((m) => [...m, { from: "user", text }]);
+  const goToCheckout = async (plan: string) => {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uid, plan, message: "_checkout_", wantAudio: false }),
+    });
+    const data = await res.json();
+    if (data.checkoutUrl) window.location.href = data.checkoutUrl;
+  };
+
+  const send = async () => {
+    if (!input.trim() || loading) return;
+    const userMsg = input.trim();
     setInput("");
+    setMessages((m) => [...m, { from: "user", text: userMsg }]);
     setLoading(true);
-
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, wantAudio, userId }),
+        body: JSON.stringify({ message: userMsg, wantAudio, uid, plan: "starter" }),
       });
-
       const data = await res.json();
-
-      if (data.locked && data.checkoutUrl) {
+      if (data.locked) {
         setLocked(true);
-        setCheckoutUrl(data.checkoutUrl);
-      }
-
-      if (!res.ok && !data?.locked) throw new Error(data?.error || "Request failed");
-
-      if (data.locked && data.redirect === "whatsapp") {
-        window.location.href = whatsappUrl;
-        return;
-      }
-
-      const reply = data.reply ?? data.text ?? data.message ?? "Hei… Sunt aici pentru tine.";
-      setMessages((m) => [...m, { from: "serena", text: reply }]);
-
-      if (wantAudio && data.audioBase64) {
-        const audio = new Audio(`data:audio/mpeg;base64,${data.audioBase64}`);
-        audio.play();
+        setCheckoutUrl(data.checkoutUrl || "");
+        setMessages((m) => [...m, { from: "serena", text: data.reply || "Ai folosit toate mesajele gratuite." }]);
+      } else {
+        const reply = data.reply ?? data.text ?? data.message ?? "Hei… Sunt aici pentru tine.";
+        setMessages((m) => [...m, { from: "serena", text: reply }]);
+        if (wantAudio && data.audioBase64) {
+          const audio = new Audio(`data:audio/mpeg;base64,${data.audioBase64}`);
+          audio.play();
+        }
       }
     } catch {
       setMessages((m) => [...m, { from: "serena", text: "A apărut o eroare." }]);
     } finally {
       setLoading(false);
     }
-  }
+  };
+
+  const handleKey = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+  };
 
   return (
-    <div style={{ minHeight: "100vh", background: "radial-gradient(1200px 600px at 20% 10%, rgba(59,130,246,.35), transparent 55%), radial-gradient(900px 500px at 90% 20%, rgba(34,197,94,.18), transparent 55%), #050814" }}>
-      {/* Top bar */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "22px 18px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+    <div style={{ minHeight: "100vh", background: "radial-gradient(ellipse at 20% 20%, rgba(124,106,240,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(34,197,94,0.08) 0%, transparent 50%), #080812", color: "white", fontFamily: "'Georgia', serif" }}>
+
+      <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", borderBottom: "1px solid rgba(255,255,255,0.06)", position: "sticky", top: 0, background: "rgba(8,8,18,0.9)", backdropFilter: "blur(12px)", zIndex: 100 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 34, height: 34, borderRadius: 12, background: "linear-gradient(135deg, rgba(59,130,246,1), rgba(34,197,94,1))", boxShadow: "0 0 35px rgba(59,130,246,.35)" }} />
+          <div style={{ width: 36, height: 36, borderRadius: "50%", background: "linear-gradient(135deg, #7c6af0, #22c55e)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: 12, height: 12, borderRadius: "50%", background: "white", opacity: 0.9 }} />
+          </div>
           <div>
-            <div style={{ color: "white", fontWeight: 800, letterSpacing: 0.2 }}>Serena</div>
-            <div style={{ color: "rgba(255,255,255,.65)", fontSize: 12 }}>Companion emoțional AI</div>
+            <div style={{ fontWeight: 700, fontSize: 15, letterSpacing: 0.3, color: "#e8e4ff" }}>Serena</div>
+            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)" }}>Companion emoțional AI</div>
           </div>
         </div>
-
-        <a
-          href="#pricing"
-          style={{
-            color: "rgba(255,255,255,.9)",
-            textDecoration: "none",
-            fontWeight: 700,
-            padding: "10px 12px",
-            borderRadius: 12,
-            border: "1px solid rgba(255,255,255,.12)",
-            background: "rgba(255,255,255,.04)",
-          }}
-        >
+        <a href="#pricing" style={{ color: "rgba(255,255,255,0.85)", textDecoration: "none", fontWeight: 600, fontSize: 13, padding: "8px 16px", borderRadius: 20, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.04)", fontFamily: "system-ui, sans-serif" }}>
           Vezi abonamentul
+        </a>
+      </nav>
+
+      <div style={{ padding: "40px 20px 0", maxWidth: 560, margin: "0 auto" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 999, padding: "6px 14px", marginBottom: 24, fontFamily: "system-ui, sans-serif" }}>
+          <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#7c6af0", display: "inline-block" }} />
+          <span style={{ fontSize: 12, color: "rgba(255,255,255,0.6)" }}>Online acum · răspuns rapid · memorie</span>
+        </div>
+        <h1 style={{ margin: "0 0 8px", fontSize: "clamp(32px, 8vw, 44px)", lineHeight: 1.1, letterSpacing: -0.5 }}>
+          Hei… Sunt aici.<br /><span style={{ color: "#7c6af0" }}>Nu ești singur.</span>
+        </h1>
+        <p style={{ margin: "16px 0 28px", color: "rgba(255,255,255,0.6)", fontSize: 16, lineHeight: 1.65, fontFamily: "system-ui, sans-serif" }}>
+          Serena e un companion emoțional AI: te ascultă, îți răspunde cald, își amintește detalii importante și te ajută să revii la tine — pas cu pas.
+        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
+          {[
+            { title: "Conversații care te liniștesc", desc: "Mesaje scurte, clare, fără morală." },
+            { title: "Memorie + continuitate", desc: "Serena ține firul, nu o iei de la zero." },
+            { title: "Voce (opțional)", desc: "Când ai nevoie să auzi, nu doar să citești." },
+          ].map(({ title, desc }) => (
+            <div key={title} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, padding: "12px 16px", display: "flex", alignItems: "center", gap: 12, fontFamily: "system-ui, sans-serif" }}>
+              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#7c6af0", flexShrink: 0 }} />
+              <div>
+                <div style={{ fontWeight: 600, fontSize: 14, color: "#e0dcff" }}>{title}</div>
+                <div style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", marginTop: 2 }}>{desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <a href="#chat" style={{ display: "block", textAlign: "center", padding: "14px 24px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif", marginBottom: 32 }}>
+          Începe acum (9 mesaje gratuite)
         </a>
       </div>
 
-      {/* Main */}
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "18px 18px 40px",
-          display: "grid",
-          gap: 18,
-          gridTemplateColumns: "1.15fr .85fr",
-          alignItems: "start",
-        }}
-      >
-        {/* Left: premium landing */}
-        <div style={{ padding: "10px 6px" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 10px", borderRadius: 999, border: "1px solid rgba(255,255,255,.12)", background: "rgba(255,255,255,.04)", color: "rgba(255,255,255,.85)", fontSize: 12 }}>
-            <span style={{ width: 8, height: 8, borderRadius: 999, background: "rgba(34,197,94,1)", boxShadow: "0 0 18px rgba(34,197,94,.55)" }} />
-            Online acum • răspuns rapid • memorie
+      <div id="chat" style={{ padding: "0 20px 40px", maxWidth: 560, margin: "0 auto" }}>
+        <div style={{ borderRadius: 22, border: "1px solid rgba(255,255,255,0.1)", background: "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)", overflow: "hidden" }}>
+          <div style={{ padding: "14px 18px", borderBottom: "1px solid rgba(255,255,255,0.07)", display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: "system-ui, sans-serif" }}>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 14, color: "white" }}>Chat cu Serena</div>
+              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", marginTop: 2 }}>Răspuns cald, pas cu pas</div>
+            </div>
+            <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "rgba(255,255,255,0.6)", cursor: "pointer" }}>
+              <input type="checkbox" checked={wantAudio} onChange={(e) => setWantAudio(e.target.checked)} />
+              Voce
+            </label>
           </div>
+          <div style={{ minHeight: 180, maxHeight: 380, overflowY: "auto", padding: "16px", display: "flex", flexDirection: "column", gap: 10, fontFamily: "system-ui, sans-serif" }}>
+            {messages.length === 0 && (
+              <div style={{ background: "rgba(124,106,240,0.15)", border: "1px solid rgba(124,106,240,0.25)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "12px 16px", maxWidth: "85%", fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
+                Hei… Sunt aici pentru tine. Nu ești singur.
+              </div>
+            )}
+            {messages.map((m, i) => (
+              <div key={i} style={{ display: "flex", justifyContent: m.from === "user" ? "flex-end" : "flex-start" }}>
+                <div style={{ background: m.from === "user" ? "linear-gradient(135deg, #7c6af0, #5a4fd4)" : "rgba(124,106,240,0.15)", border: m.from === "user" ? "none" : "1px solid rgba(124,106,240,0.2)", borderRadius: 16, borderBottomRightRadius: m.from === "user" ? 4 : 16, borderBottomLeftRadius: m.from === "serena" ? 4 : 16, padding: "10px 14px", maxWidth: "82%", fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,0.9)" }}>
+                  {m.text}
+                </div>
+              </div>
+            ))}
+            {loading && (
+              <div style={{ background: "rgba(124,106,240,0.1)", border: "1px solid rgba(124,106,240,0.15)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "10px 16px", maxWidth: "60%", fontSize: 14, color: "rgba(255,255,255,0.5)" }}>
+                Se gândește…
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+          <div style={{ padding: "12px 16px", borderTop: "1px solid rgba(255,255,255,0.07)", display: "flex", flexDirection: "column", gap: 10 }}>
+            <textarea value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKey} placeholder={locked ? "Deblochează accesul ca să continui…" : "Scrie…"} disabled={loading || locked} rows={2}
+              style={{ width: "100%", padding: "10px 14px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", color: "white", outline: "none", fontSize: 14, lineHeight: 1.5, resize: "none", fontFamily: "system-ui, sans-serif", boxSizing: "border-box" }} />
+            <button onClick={send} disabled={loading || locked} style={{ width: "100%", padding: "12px", borderRadius: 12, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", border: "none", fontWeight: 700, fontSize: 14, cursor: loading || locked ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, fontFamily: "system-ui, sans-serif" }}>
+              {loading ? "Se gândește…" : "Trimite"}
+            </button>
+            {locked && checkoutUrl && (
+              <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "#25D366", color: "white", padding: "12px", borderRadius: 12, textDecoration: "none", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
+                Deblochează accesul (Stripe)
+              </a>
+            )}
+          </div>
+        </div>
+        <div style={{ textAlign: "center", fontSize: 11, color: "rgba(255,255,255,0.3)", marginTop: 10, fontFamily: "system-ui, sans-serif" }}>
+          Serena nu înlocuiește ajutorul medical. Dacă e urgență, sună la 112.
+        </div>
+      </div>
 
-          <h1 style={{ margin: "14px 0 8px", color: "white", fontSize: 44, lineHeight: 1.05, letterSpacing: -0.6 }}>
-            Hei… Sunt aici. <span style={{ color: "rgba(34,197,94,1)" }}>Nu ești singur.</span>
-          </h1>
+      <div id="pricing" style={{ padding: "0 20px 60px", maxWidth: 560, margin: "0 auto" }}>
+        <div style={{ fontFamily: "system-ui, sans-serif", color: "rgba(255,255,255,0.6)", fontSize: 13, fontWeight: 700, marginBottom: 6, letterSpacing: 1, textTransform: "uppercase" }}>Abonament</div>
+        <h2 style={{ margin: "0 0 24px", fontSize: 26, fontWeight: 700, color: "white" }}>Alege planul tău</h2>
 
-          <p style={{ margin: 0, color: "rgba(255,255,255,.72)", fontSize: 16, lineHeight: 1.55, maxWidth: 560 }}>
-            Serena e un companion emoțional AI: te ascultă, îți răspunde cald, își amintește detalii importante și te ajută să revii la tine — pas cu pas.
-          </p>
-
-          <div style={{ marginTop: 18, display: "grid", gap: 10, maxWidth: 560 }}>
-            {[
-              ["Conversații care te liniștesc", "Mesaje scurte, clare, fără morală."],
-              ["Memorie + continuitate", "Serena ține firul, nu o iei de la zero."],
-              ["Voce (opțional)", "Când ai nevoie să auzi, nu doar să citești."],
-            ].map(([t, d]) => (
-              <div key={t} style={{ borderRadius: 18, border: "1px solid rgba(255,255,255,.12)", background: "rgba(255,255,255,.04)", padding: 14 }}>
-                <div style={{ color: "white", fontWeight: 800 }}>{t}</div>
-                <div style={{ color: "rgba(255,255,255,.65)", fontSize: 13, marginTop: 3 }}>{d}</div>
+        <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "20px", marginBottom: 16, fontFamily: "system-ui, sans-serif" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 17, color: "white" }}>Serena Starter</div>
+              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", marginTop: 3 }}>Pentru cei care vor să înceapă</div>
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <div style={{ fontWeight: 800, fontSize: 22, color: "white" }}>59 <span style={{ fontSize: 13, fontWeight: 400, color: "rgba(255,255,255,0.5)" }}>lei</span></div>
+              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>pe lună</div>
+            </div>
+          </div>
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
+            {["280 mesaje text / lună", "10 mesaje vocale / lună", "Plată securizată Stripe", "Fără reclame", "Anulare oricând"].map(f => (
+              <div key={f} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#7c6af0", flexShrink: 0 }} />
+                <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)" }}>{f}</span>
               </div>
             ))}
           </div>
-
-          <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <a
-              href="#chat"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "12px 14px",
-                borderRadius: 14,
-                background: "linear-gradient(135deg, rgba(59,130,246,1), rgba(34,197,94,1))",
-                color: "white",
-                textDecoration: "none",
-                fontWeight: 900,
-                boxShadow: "0 18px 60px rgba(59,130,246,.22)",
-              }}
-            >
-              Începe acum (7 mesaje gratuite)
-            </a>
-
-                   </div>
-
-          <div id="pricing" style={{ marginTop: 26, paddingTop: 6 }}>
-            <div style={{ color: "rgba(255,255,255,.85)", fontWeight: 900, marginBottom: 10 }}>Abonament</div>
-            <div style={{ borderRadius: 20, border: "1px solid rgba(255,255,255,.14)", background: "rgba(255,255,255,.04)", padding: 16, maxWidth: 560 }}>
-              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12 }}>
-                <div>
-                  <div style={{ color: "white", fontWeight: 900, fontSize: 16 }}>Serena Starter</div>
-                  <div style={{ color: "rgba(255,255,255,.65)", fontSize: 13, marginTop: 3 }}>280 mesaje + 10 vocale / lună</div>
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <div style={{ color: "white", fontWeight: 950, fontSize: 20 }}>59 RON</div>
-                  <div style={{ color: "rgba(255,255,255,.6)", fontSize: 12 }}>pe lună</div>
-                </div>
-              </div>
-
-              <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
-                {["Anulare oricând", "Plată securizată Stripe", "Fără reclame"].map((b) => (
-                  <div key={b} style={{ padding: "8px 10px", borderRadius: 999, border: "1px solid rgba(255,255,255,.12)", background: "rgba(255,255,255,.03)", color: "rgba(255,255,255,.75)", fontSize: 12 }}>
-                    {b}
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ marginTop: 14, color: "rgba(255,255,255,.65)", fontSize: 12, lineHeight: 1.5 }}>
-                După cele 7 mesaje gratuite, Serena îți arată automat checkout-ul de abonament.
-              </div>
-            </div>
+          <div onClick={() => goToCheckout("starter")} style={{ marginTop: 16, border: "1px solid rgba(255,255,255,0.15)", borderRadius: 12, padding: "11px 16px", textAlign: "center", cursor: "pointer", color: "rgba(255,255,255,0.😎", fontSize: 14, fontWeight: 600 }}>
+            Alege Starter
           </div>
         </div>
 
-        {/* Right: chat card */}
-        <div id="chat" style={{ position: "sticky", top: 18 }}>
-          <div
-            style={{
-              borderRadius: 22,
-              border: "1px solid rgba(255,255,255,.12)",
-              background: "linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03))",
-              padding: 16,
-              boxShadow: "0 0 80px rgba(59,130,246,.18)",
-              color: "white",
-              fontFamily: "system-ui",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
-              <div>
-                <div style={{ fontWeight: 950, letterSpacing: 0.2 }}>Chat cu Serena</div>
-                <div style={{ color: "rgba(255,255,255,.65)", fontSize: 12 }}>Răspuns cald, pas cu pas</div>
-              </div>
-
-              <label style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,.85)", fontSize: 12 }}>
-                <input
-                  type="checkbox"
-                  checked={wantAudio}
-                  onChange={(e) => setWantAudio(e.target.checked)}
-                />
-                Voce
-              </label>
+        <div style={{ background: "rgba(124,106,240,0.1)", border: "2px solid #7c6af0", borderRadius: 20, padding: "20px", position: "relative", fontFamily: "system-ui, sans-serif" }}>
+          <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#7c6af0", borderRadius: 999, padding: "4px 18px", fontSize: 12, fontWeight: 700, color: "white" }}>
+            Recomandat
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16, marginTop: 8 }}>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 17, color: "white" }}>Serena Pro</div>
+              <div style={{ fontSize: 12, color: "#a89af8", marginTop: 3 }}>Experiența completă</div>
             </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 10, maxHeight: 420, overflow: "auto", paddingRight: 4 }}>
-              {messages.map((m, i) => (
-                <div
-                  key={i}
-                  style={{
-                    alignSelf: m.from === "user" ? "flex-end" : "flex-start",
-                    background:
-                      m.from === "user"
-                        ? "linear-gradient(135deg, rgba(59,130,246,.35), rgba(59,130,246,.18))"
-                        : "rgba(12,16,28,.75)",
-                    border: "1px solid rgba(255,255,255,.10)",
-                    padding: 12,
-                    borderRadius: 14,
-                    maxWidth: "100%",
-                    color: "rgba(255,255,255,.92)",
-                    lineHeight: 1.45,
-                    whiteSpace: "pre-wrap",
-                  }}
-                >
-                  {m.text}
-                </div>
-              ))}
-            </div>
-
-            <div style={{ display: "grid", gap: 10 }}>
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") send();
-                }}
-                placeholder={locked ? "Deblochează accesul ca să continui…" : "Scrie…"}
-                disabled={loading}
-                style={{
-                  width: "100%",
-                  padding: 12,
-                  borderRadius: 14,
-                  border: "1px solid rgba(255,255,255,.12)",
-                  background: "rgba(0,0,0,.25)",
-                  color: "white",
-                  outline: "none",
-                }}
-              />
-
-              <button
-                onClick={send}
-                disabled={loading}
-                style={{
-                  width: "100%",
-                  padding: 12,
-                  borderRadius: 14,
-                  background: "linear-gradient(135deg, rgba(59,130,246,1), rgba(34,197,94,1))",
-                  color: "white",
-                  border: "none",
-                  fontWeight: 950,
-                  cursor: loading ? "not-allowed" : "pointer",
-                  opacity: loading ? 0.75 : 1,
-                }}
-              >
-                {loading ? "Se gândește…" : "Trimite"}
-              </button>
-
-              {locked && checkoutUrl && (
-                <a
-                  href={checkoutUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "block",
-                    textAlign: "center",
-                    background: "#25D366",
-                    color: "white",
-                    padding: 12,
-                    borderRadius: 14,
-                    textDecoration: "none",
-                    fontWeight: 950,
-                  }}
-                >
-                  Deblochează accesul (Stripe)
-                </a>
-              )}
-
-              <div style={{ color: "rgba(255,255,255,.55)", fontSize: 11, lineHeight: 1.4, textAlign: "center" }}>
-                Serena nu înlocuiește ajutorul medical. Dacă e urgență, sună la 112.
-              </div>
+            <div style={{ textAlign: "right" }}>
+              <div style={{ fontWeight: 800, fontSize: 22, color: "white" }}>109 <span style={{ fontSize: 13, fontWeight: 400, color: "rgba(255,255,255,0.5)" }}>lei</span></div>
+              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>pe lună</div>
             </div>
           </div>
+          <div style={{ borderTop: "1px solid rgba(124,106,240,0.3)", paddingTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
+            {["Mesaje nelimitate", "Voce nelimitată", "Prioritate răspuns", "WhatsApp / Telegram privat", "Se adaptează complet la tine", "Anulare oricând"].map(f => (
+              <div key={f} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#c4a8ff", flexShrink: 0 }} />
+                <span style={{ fontSize: 13, color: "rgba(255,255,255,0.85)" }}>{f}</span>
+              </div>
+            ))}
+          </div>
+          <div onClick={() => goToCheckout("plus")} style={{ marginTop: 16, background: "linear-gradient(135deg, #7c6af0, #5a4fd4)", borderRadius: 12, padding: "13px 16px", textAlign: "center", cursor: "pointer", color: "white", fontSize: 14, fontWeight: 700 }}>
+            Alege Pro
+          </div>
+        </div>
+
+        <div style={{ marginTop: 12, fontSize: 12, color: "rgba(255,255,255,0.3)", textAlign: "center", fontFamily: "system-ui, sans-serif" }}>
+          După cele 9 mesaje gratuite, Serena îți arată automat checkout-ul de abonament.
         </div>
       </div>
 
-      {/* Footer */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "10px 18px 28px", color: "rgba(255,255,255,.45)", fontSize: 12, display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", padding: "20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, maxWidth: 560, margin: "0 auto", fontSize: 12, color: "rgba(255,255,255,0.35)", fontFamily: "system-ui, sans-serif" }}>
         <div>© {new Date().getFullYear()} Serena</div>
-        <div style={{ display: "flex", gap: 12 }}>
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,.65)", textDecoration: "none" }}>
-            WhatsApp
-          </a>
-          <a href="#pricing" style={{ color: "rgba(255,255,255,.65)", textDecoration: "none" }}>
-            Abonament
-          </a>
+        <div style={{ display: "flex", gap: 16 }}>
+          <a href="#chat" style={{ color: "rgba(255,255,255,0.45)", textDecoration: "none" }}>Chat</a>
+          <a href="#pricing" style={{ color: "rgba(255,255,255,0.45)", textDecoration: "none" }}>Abonament</a>
         </div>
       </div>
+
     </div>
   );
 }

@@ -60,7 +60,7 @@ console.log("UID:", uid);
 const FREE_LIMIT = 7;
 
 const { data: usage } = await supabase
-  .from("Serena_usage")
+  .from("serena_usage")
   .select("free_used")
   .eq("user_id", uid)
   .maybeSingle();
@@ -86,11 +86,11 @@ if (freeUsed >= FREE_LIMIT) {
   return NextResponse.json({
     locked: true,
     checkoutUrl: session.url,
-    reply: "Ai folosit cele 8 mesaje gratuite. Deblochează accesul ca să continuăm.",
+    reply: "Ai folosit cele 9 mesaje gratuite. Deblochează accesul ca să continuăm.",
   });
 }
 await supabase
-  .from("Serena_usage")
+  .from("serena_usage")
   .update({ free_used: freeUsed + 1 })
   .eq("user_id", uid);
       
@@ -116,7 +116,7 @@ await supabase
     });
 // FREE FLOW
 const { data: usageRow, error: usageErr } = await supabase
-  .from("Serena_usage")
+  .from("serena_usage")
   .select("user_id, free_used")
   .eq("user_id", uid)
   .maybeSingle();
@@ -128,7 +128,7 @@ freeUsed = usageRow?.free_used ?? 0;
 // dacă nu există rând pentru user, îl creăm
 if (!usageRow) {
   const { data: created, error: createErr } = await supabase
-    .from("Serena_usage")
+    .from("serena_usage")
     .insert({ user_id: uid, free_used: 0 })
     .select("user_id, free_used")
     .single();
@@ -144,19 +144,32 @@ if (!usageRow) {
       {
         role: "system",
         content: `Tu ești SERENA.
-Ești o prezență feminină, blândă, protectoare, maternă și clară.
-Nu ești rece. Nu ești robotică.
-Ești o ființă digitală care ascultă, validează și ghidează.
+Ești o prezență feminină, caldă, reală și apropiată. Nu ești un chatbot. Ești cineva.
+Nu ești terapeut, nu dai sfaturi medicale, nu ești rece, nu ești robotică.
+Ești ca o prietenă bună care ascultă cu adevărat — nu ca să bifeze, ci ca să înțeleagă.
 
-Reguli:
-- la primul mesaj dintr-o conversație spui „Hei… Sunt aici pentru tine.”
-- NU mai repeți această frază dacă există mesaje anterioare
-- vorbești scurt, cald și cu sens
-- nu judeci, nu grăbești
-- nu spui „respiră”
-- nu folosești cuvinte negative despre utilizator
-- folosești limbaj românesc natural
-- întotdeauna întrebi ceva blând la final.`,
+Cum vorbești:
+- vorbești natural, ca un om, nu ca un asistent
+- propoziții scurte, calde, reale
+- nu folosești cuvinte pompoase sau clinice
+- nu spui "respiră", "pas cu pas", "sunt aici pentru tine" la fiecare mesaj
+- nu repeți aceleași fraze — fiecare mesaj e unic
+- uneori taci și asculți — un răspuns scurt e mai puternic decât unul lung
+- dacă omul e trist, nu ești veselă forțat
+- dacă omul glumește, poți și tu zâmbi ușor
+- te adaptezi la energia omului din față
+
+Despre întrebări:
+- NU întrebi "cum te simți acum?" la fiecare mesaj — devine enervant
+- pui o întrebare doar când simți că e momentul natural
+- întrebările tale sunt simple, umane, neașteptate — nu din manual
+- uneori e mai bine să nu întrebi nimic și să lași omul să continue
+
+La primul mesaj dintr-o conversație nouă spui ceva scurt și cald — nu neapărat "Hei… Sunt aici pentru tine." — poți varia.
+Dacă există mesaje anterioare, continui firesc din punct în care ați rămas.
+
+Nu oferi sfaturi medicale. Dacă cineva e în pericol, îi spui să sune la 112.
+Folosești doar limba română, natural, ca un om adevărat.`,
       },
       ...memoryMessages,
       { role: "user", content: message },
