@@ -115,7 +115,7 @@ export default function Home() {
           ))}
         </div>
         <a href="#chat" style={{ display: "block", textAlign: "center", padding: "14px 24px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif", marginBottom: 32 }}>
-          Începe acum (9 mesaje gratuite)
+          Începe acum (12 mesaje gratuite)
         </a>
       </div>
 
@@ -131,7 +131,7 @@ export default function Home() {
               Voce
             </label>
           </div>
-          <div style={{ minHeight: 180, maxHeight: 380, overflowY: "auto", padding: "16px", display: "flex", flexDirection: "column", gap: 10, fontFamily: "system-ui, sans-serif" }}>
+          <div style={{ minHeight: 180, maxHeight: 420, overflowY: "auto", padding: "16px", display: "flex", flexDirection: "column", gap: 10, fontFamily: "system-ui, sans-serif" }}>
             {messages.length === 0 && (
               <div style={{ background: "rgba(124,106,240,0.15)", border: "1px solid rgba(124,106,240,0.25)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "12px 16px", maxWidth: "85%", fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
                 Hei… Sunt aici pentru tine. Nu ești singur.
@@ -152,15 +152,25 @@ export default function Home() {
             <div ref={messagesEndRef} />
           </div>
           <div style={{ padding: "12px 16px", borderTop: "1px solid rgba(255,255,255,0.07)", display: "flex", flexDirection: "column", gap: 10 }}>
-            <textarea value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKey} placeholder={locked ? "Deblochează accesul ca să continui…" : "Scrie…"} disabled={loading || locked} rows={2}
+            <textarea value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKey} placeholder={locked ? "Alege un plan ca să continui…" : "Scrie…"} disabled={loading || locked} rows={2}
               style={{ width: "100%", padding: "10px 14px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", color: "white", outline: "none", fontSize: 14, lineHeight: 1.5, resize: "none", fontFamily: "system-ui, sans-serif", boxSizing: "border-box" }} />
-            <button onClick={send} disabled={loading || locked} style={{ width: "100%", padding: "12px", borderRadius: 12, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", border: "none", fontWeight: 700, fontSize: 14, cursor: loading || locked ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, fontFamily: "system-ui, sans-serif" }}>
-              {loading ? "Se gândește…" : "Trimite"}
-            </button>
-            {locked && checkoutUrl && (
-              <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "#25D366", color: "white", padding: "12px", borderRadius: 12, textDecoration: "none", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
-                Deblochează accesul (Stripe)
-              </a>
+            {!locked && (
+              <button onClick={send} disabled={loading} style={{ width: "100%", padding: "12px", borderRadius: 12, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", border: "none", fontWeight: 700, fontSize: 14, cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, fontFamily: "system-ui, sans-serif" }}>
+                {loading ? "Se gândește…" : "Trimite"}
+              </button>
+            )}
+            {locked && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <div onClick={() => goToCheckout("starter")} style={{ textAlign: "center", background: "linear-gradient(135deg, #7c6af0, #5a4fd4)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
+                  Alege abonamentul
+                </div>
+                <a href="https://wa.me/40722335853" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "#25D366", color: "white", padding: "12px", borderRadius: 12, textDecoration: "none", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
+                  Continuă pe WhatsApp
+                </a>
+                <a href="https://t.me/SerenaRaeOfficial" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "#2AABEE", color: "white", padding: "12px", borderRadius: 12, textDecoration: "none", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
+                  Continuă pe Telegram
+                </a>
+              </div>
             )}
           </div>
         </div>
@@ -225,7 +235,7 @@ export default function Home() {
         </div>
 
         <div style={{ marginTop: 12, fontSize: 12, color: "rgba(255,255,255,0.3)", textAlign: "center", fontFamily: "system-ui, sans-serif" }}>
-          După cele 9 mesaje gratuite, Serena îți arată automat checkout-ul de abonament.
+          După cele 12 mesaje gratuite, Serena îți arată automat opțiunile de abonament.
         </div>
       </div>
 
