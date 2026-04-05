@@ -11,14 +11,14 @@ function ThankYouContent() {
 
   const features = isPro
     ? [
-        "Mesaje nelimitate — zi și noapte",
-        "Voce nelimitată — ascult-o pe Serena",
-        "Serena nu te judecă — niciodată, pentru nimic",
+        "Mesaje nelimitate — zi si noapte",
+        "Voce nelimitata — ascult-o pe Serena",
+        "Serena nu te judeca — niciodata, pentru nimic",
       ]
     : [
-        "280 mesaje text pe lună",
-        "10 mesaje vocale pe lună",
-        "Serena nu te judecă — niciodată, pentru nimic",
+        "280 mesaje text pe luna",
+        "10 mesaje vocale pe luna",
+        "Serena nu te judeca — niciodata, pentru nimic",
       ];
 
   return (
@@ -56,8 +56,8 @@ function ThankYouContent() {
 
         <p className="subtitle">
           {isPro
-            ? "Abonamentul tău Pro e activ. Poți vorbi cu Serena oricând, fără limită."
-            : "Abonamentul tău Starter e activ. 280 de mesaje te așteaptă."}
+            ? "Abonamentul tau Pro e activ. Poti vorbi cu Serena oricand, fara limita."
+            : "Abonamentul tau Starter e activ. 280 de mesaje te asteapta."}
         </p>
 
         <ul className="features">
@@ -80,7 +80,7 @@ function ThankYouContent() {
         </ul>
 
         <a href="/#chat" className="cta-btn">
-          Începe conversația cu Serena →
+          Incepe conversatia cu Serena
         </a>
 
         <div className="share-row">
@@ -89,21 +89,17 @@ function ThankYouContent() {
             className="share-btn"
             target="_blank"
             rel="noreferrer"
-          >
-            WhatsApp
-          </a>
+          >WhatsApp</a>
           
             href="https://t.me/SerenaRaeOfficial"
             className="share-btn"
             target="_blank"
             rel="noreferrer"
-          >
-            Telegram
-          </a>
+          >Telegram</a>
         </div>
 
         <p className="small-note">
-          Ai primit confirmarea și pe email. Poți anula oricând din cont.
+          Ai primit confirmarea si pe email. Poti anula oricand din cont.
         </p>
       </div>
     </main>
@@ -206,7 +202,7 @@ export default function ThankYouPage() {
         }
         @keyframes pop {
           from { opacity: 0; transform: scale(0.5); }
-          to   { opacity: 1; transform: scale(1); }
+          to { opacity: 1; transform: scale(1); }
         }
         .icon-wrap svg { width: 34px; height: 34px; }
 
@@ -248,7 +244,7 @@ export default function ThankYouPage() {
         }
         @keyframes fadein {
           from { opacity:0; transform:translateX(-8px); }
-          to   { opacity:1; transform:translateX(0); }
+          to { opacity:1; transform:translateX(0); }
         }
 
         .check {
@@ -276,7 +272,6 @@ export default function ThankYouPage() {
           text-decoration: none;
           transition: background 0.2s, transform 0.1s;
           margin-bottom: 16px;
-          animation: fadein 0.4s ease 1.1s both;
         }
         .cta-btn:hover { background: #b8685a; }
         .cta-btn:active { transform: scale(0.98); }
@@ -284,7 +279,6 @@ export default function ThankYouPage() {
         .share-row {
           display: flex;
           gap: 10px;
-          animation: fadein 0.4s ease 1.2s both;
         }
         .share-btn {
           flex: 1;
@@ -299,7 +293,6 @@ export default function ThankYouPage() {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 6px;
           transition: background 0.15s, color 0.15s;
           text-decoration: none;
         }
@@ -310,7 +303,6 @@ export default function ThankYouPage() {
           font-size: 12px;
           color: var(--text-muted);
           margin-top: 20px;
-          animation: fadein 0.4s ease 1.3s both;
         }
 
         @media (max-width: 480px) {
