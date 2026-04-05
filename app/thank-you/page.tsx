@@ -84,13 +84,13 @@ function ThankYouContent() {
         </a>
 
         <div className="share-row">
-          
+         <a 
             href="https://wa.me/40722335853"
             className="share-btn"
             target="_blank"
             rel="noreferrer"
           >WhatsApp</a>
-          
+          <a
             href="https://t.me/SerenaRaeOfficial"
             className="share-btn"
             target="_blank"
