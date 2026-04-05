@@ -21,14 +21,14 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [messages, loading]);
 
   const goToCheckout = async (plan: string) => {
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ uid, plan, message: "_checkout_", wantAudio: false }),
+      body: JSON.stringify({ uid, plan, message: "__checkout__", wantAudio: false }),
     });
     const data = await res.json();
     if (data.checkoutUrl) window.location.href = data.checkoutUrl;
@@ -72,6 +72,17 @@ export default function Home() {
 
   return (
     <div style={{ minHeight: "100vh", background: "radial-gradient(ellipse at 20% 20%, rgba(124,106,240,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(34,197,94,0.08) 0%, transparent 50%), #080812", color: "white", fontFamily: "'Georgia', serif" }}>
+      <style>{`
+        @keyframes typingDot {
+          0%, 100% { opacity: 0.3; transform: translateY(0px); }
+          50% { opacity: 1; transform: translateY(-4px); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .msg-appear { animation: fadeIn 0.3s ease forwards; }
+      `}</style>
 
       <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", borderBottom: "1px solid rgba(255,255,255,0.06)", position: "sticky", top: 0, background: "rgba(8,8,18,0.9)", backdropFilter: "blur(12px)", zIndex: 100 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -133,20 +144,22 @@ export default function Home() {
           </div>
           <div style={{ minHeight: 180, maxHeight: 420, overflowY: "auto", padding: "16px", display: "flex", flexDirection: "column", gap: 10, fontFamily: "system-ui, sans-serif" }}>
             {messages.length === 0 && (
-              <div style={{ background: "rgba(124,106,240,0.15)", border: "1px solid rgba(124,106,240,0.25)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "12px 16px", maxWidth: "85%", fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
+              <div className="msg-appear" style={{ background: "rgba(124,106,240,0.15)", border: "1px solid rgba(124,106,240,0.25)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "12px 16px", maxWidth: "85%", fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
                 Hei… Sunt aici pentru tine. Nu ești singur.
               </div>
             )}
             {messages.map((m, i) => (
-              <div key={i} style={{ display: "flex", justifyContent: m.from === "user" ? "flex-end" : "flex-start" }}>
+              <div key={i} className="msg-appear" style={{ display: "flex", justifyContent: m.from === "user" ? "flex-end" : "flex-start" }}>
                 <div style={{ background: m.from === "user" ? "linear-gradient(135deg, #7c6af0, #5a4fd4)" : "rgba(124,106,240,0.15)", border: m.from === "user" ? "none" : "1px solid rgba(124,106,240,0.2)", borderRadius: 16, borderBottomRightRadius: m.from === "user" ? 4 : 16, borderBottomLeftRadius: m.from === "serena" ? 4 : 16, padding: "10px 14px", maxWidth: "82%", fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,0.9)" }}>
                   {m.text}
                 </div>
               </div>
             ))}
             {loading && (
-              <div style={{ background: "rgba(124,106,240,0.1)", border: "1px solid rgba(124,106,240,0.15)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "10px 16px", maxWidth: "60%", fontSize: 14, color: "rgba(255,255,255,0.5)" }}>
-                Se gândește…
+              <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "12px 16px", background: "rgba(124,106,240,0.1)", border: "1px solid rgba(124,106,240,0.15)", borderRadius: 16, borderBottomLeftRadius: 4, maxWidth: "80px" }}>
+                {[0, 0.2, 0.4].map((delay, i) => (
+                  <div key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: "#7c6af0", animation: `typingDot 1s ease infinite ${delay}s` }} />
+                ))}
               </div>
             )}
             <div ref={messagesEndRef} />
@@ -156,7 +169,7 @@ export default function Home() {
               style={{ width: "100%", padding: "10px 14px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", color: "white", outline: "none", fontSize: 14, lineHeight: 1.5, resize: "none", fontFamily: "system-ui, sans-serif", boxSizing: "border-box" }} />
             {!locked && (
               <button onClick={send} disabled={loading} style={{ width: "100%", padding: "12px", borderRadius: 12, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", border: "none", fontWeight: 700, fontSize: 14, cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, fontFamily: "system-ui, sans-serif" }}>
-                {loading ? "Se gândește…" : "Trimite"}
+                {loading ? "Serena scrie…" : "Trimite"}
               </button>
             )}
             {locked && (
@@ -182,7 +195,6 @@ export default function Home() {
       <div id="pricing" style={{ padding: "0 20px 60px", maxWidth: 560, margin: "0 auto" }}>
         <div style={{ fontFamily: "system-ui, sans-serif", color: "rgba(255,255,255,0.6)", fontSize: 13, fontWeight: 700, marginBottom: 6, letterSpacing: 1, textTransform: "uppercase" }}>Abonament</div>
         <h2 style={{ margin: "0 0 24px", fontSize: 26, fontWeight: 700, color: "white" }}>Alege planul tău</h2>
-
         <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "20px", marginBottom: 16, fontFamily: "system-ui, sans-serif" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
             <div>
@@ -202,11 +214,10 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div onClick={() => goToCheckout("starter")} style={{ marginTop: 16, border: "1px solid rgba(255,255,255,0.15)", borderRadius: 12, padding: "11px 16px", textAlign: "center", cursor: "pointer", color: "rgba(255,255,255,0.😎", fontSize: 14, fontWeight: 600 }}>
+          <div onClick={() => goToCheckout("starter")} style={{ marginTop: 16, border: "1px solid rgba(255,255,255,0.15)", borderRadius: 12, padding: "11px 16px", textAlign: "center", cursor: "pointer", color: "rgba(255,255,255,0.8)", fontSize: 14, fontWeight: 600 }}>
             Alege Starter
           </div>
         </div>
-
         <div style={{ background: "rgba(124,106,240,0.1)", border: "2px solid #7c6af0", borderRadius: 20, padding: "20px", position: "relative", fontFamily: "system-ui, sans-serif" }}>
           <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#7c6af0", borderRadius: 999, padding: "4px 18px", fontSize: 12, fontWeight: 700, color: "white" }}>
             Recomandat
@@ -233,7 +244,6 @@ export default function Home() {
             Alege Pro
           </div>
         </div>
-
         <div style={{ marginTop: 12, fontSize: 12, color: "rgba(255,255,255,0.3)", textAlign: "center", fontFamily: "system-ui, sans-serif" }}>
           După cele 12 mesaje gratuite, Serena îți arată automat opțiunile de abonament.
         </div>
