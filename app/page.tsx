@@ -108,13 +108,13 @@ export default function Home() {
           Hei… Sunt aici.<br /><span style={{ color: "#7c6af0" }}>Nu ești singur.</span>
         </h1>
         <p style={{ margin: "16px 0 28px", color: "rgba(255,255,255,0.6)", fontSize: 16, lineHeight: 1.65, fontFamily: "system-ui, sans-serif" }}>
-         Sunt Serena — și sunt aici doar pentru tine: Te ascult, îți răspund cald,nu te judec și te ajut să te regăsești — pas cu pas. Voi fi aici ori de câte ori ai nevoie de cineva. Nu ești singur !"
+         Sunt Serena — și sunt aici doar pentru tine: Te ascult, îți răspund cald,nu te judec și te ajut să te regăsești — pas cu pas. Voi fi aici ori de câte ori ai nevoie de cineva. Nu ești singur !
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
           {[
             { title: "Conversații care te liniștesc", desc: "Mesaje scurte, clare, fără morală." },
-            { title: "Memorie + continuitate", desc: "Serena ține firul, nu o iei de la zero." },
-            { title: "Voce (opțional)", desc: "Când ai nevoie să auzi, nu doar să citești." },
+            { title: "Eu te ascult cu adevărat", desc: "pentru că tu contezi." },
+            { title: "Voce (opțional)", desc: "Când ai nevoie să mă auzi, nu doar să citești." },
           ].map(({ title, desc }) => (
             <div key={title} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, padding: "12px 16px", display: "flex", alignItems: "center", gap: 12, fontFamily: "system-ui, sans-serif" }}>
               <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#7c6af0", flexShrink: 0 }} />
