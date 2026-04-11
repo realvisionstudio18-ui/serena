@@ -240,7 +240,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div onClick={() => goToCheckout("plus")} style={{ marginTop: 16, background: "linear-gradient(135deg, #7c6af0, #5a4fd4)", borderRadius: 12, padding: "13px 16px", textAlign: "center", cursor: "pointer", color: "white", fontSize: 14, fontWeight: 700 }}>
+          <div onClick={() => goToCheckout("pro")} style={{ marginTop: 16, background: "linear-gradient(135deg, #7c6af0, #5a4fd4)", borderRadius: 12, padding: "13px 16px", textAlign: "center", cursor: "pointer", color: "white", fontSize: 14, fontWeight: 700 }}>
             Alege Pro
           </div>
         </div>
