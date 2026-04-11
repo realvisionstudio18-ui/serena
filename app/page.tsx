@@ -91,7 +91,7 @@ export default function Home() {
           </div>
           <div>
             <div style={{ fontWeight: 700, fontSize: 15, letterSpacing: 0.3, color: "#e8e4ff" }}>Serena</div>
-            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)" }}>Companion emoțional AI</div>
+            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)" }}>Companion emoțional </div>
           </div>
         </div>
         <a href="#pricing" style={{ color: "rgba(255,255,255,0.85)", textDecoration: "none", fontWeight: 600, fontSize: 13, padding: "8px 16px", borderRadius: 20, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.04)", fontFamily: "system-ui, sans-serif" }}>
@@ -108,7 +108,7 @@ export default function Home() {
           Hei… Sunt aici.<br /><span style={{ color: "#7c6af0" }}>Nu ești singur.</span>
         </h1>
         <p style={{ margin: "16px 0 28px", color: "rgba(255,255,255,0.6)", fontSize: 16, lineHeight: 1.65, fontFamily: "system-ui, sans-serif" }}>
-          Serena e un companion emoțional AI: te ascultă, îți răspunde cald, își amintește detalii importante și te ajută să revii la tine — pas cu pas.
+         Sunt Serena — și sunt aici doar pentru tine: Te ascult, îți răspund cald,nu te judec și te ajut să te regăsești — pas cu pas. Voi fi aici ori de câte ori ai nevoie de cineva. Nu ești singur !"
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
           {[
