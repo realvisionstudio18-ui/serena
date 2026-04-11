@@ -21,7 +21,7 @@ const supabase = createClient(
   process.env.SUPABASE_ANON_KEY!
 );
 
-const FREE_LIMIT = 12;
+const FREE_LIMIT = 8;
 
 async function elevenTTS(text: string) {
   const audio = await eleven.textToSpeech.convert("466mxyM3Jc9uZhiqUKRn", {
@@ -50,8 +50,8 @@ export async function POST(req: Request) {
       const plan = body.plan ?? "starter";
       const priceId =
         plan === "plus"
-          ? process.env.STRIPE_PRICE_PLUS!
-          : process.env.STRIPE_PRICE_MONTHLY!;
+          ? process.env.STRIPE_PRICE_PRO
+          : process.env.STRIPE_PRICE_STARTER;
       const session = await stripe.checkout.sessions.create({
         mode: "subscription",
         line_items: [{ price: priceId, quantity: 1 }],
@@ -87,8 +87,8 @@ export async function POST(req: Request) {
       const plan = body.plan ?? "starter";
       const priceId =
         plan === "plus"
-          ? process.env.STRIPE_PRICE_PLUS!
-          : process.env.STRIPE_PRICE_MONTHLY!;
+          ? process.env.STRIPE_PRICE_PRO
+          : process.env.STRIPE_PRICE_STARTER;
       const session = await stripe.checkout.sessions.create({
         mode: "subscription",
         line_items: [{ price: priceId, quantity: 1 }],
