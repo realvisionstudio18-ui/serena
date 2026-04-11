@@ -112,7 +112,7 @@ export default function Home() {
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
           {[
-            { title: "Conversații care te liniștesc", desc: "Mesaje scurte, clare, fără morală." },
+            { title: "Conversații care te liniștesc", desc: "Fără să te judec.Doar eu și tu." },
             { title: "Eu te ascult cu adevărat", desc: "pentru că tu contezi." },
             { title: "Voce (opțional)", desc: "Când ai nevoie să mă auzi, nu doar să citești." },
           ].map(({ title, desc }) => (
