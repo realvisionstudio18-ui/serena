@@ -126,7 +126,7 @@ export default function Home() {
           ))}
         </div>
         <a href="#chat" style={{ display: "block", textAlign: "center", padding: "14px 24px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif", marginBottom: 32 }}>
-          Începe acum (12 mesaje gratuite)
+          Începe acum (8 mesaje gratuite)
         </a>
       </div>
 
@@ -251,7 +251,7 @@ export default function Home() {
           </div>
         </div>
         <div style={{ marginTop: 12, fontSize: 12, color: "rgba(255,255,255,0.3)", textAlign: "center", fontFamily: "system-ui, sans-serif" }}>
-          După cele 12 mesaje gratuite, Serena îți arată automat opțiunile de abonament.
+          După cele 8 mesaje gratuite, Serena îți arată automat opțiunile de abonament.
         </div>
       </div>
 
