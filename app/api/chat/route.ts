@@ -80,7 +80,7 @@ export async function POST(req: Request) {
 
     const freeUsed = usageRow?.free_used ?? 0;
     const userPlan = usageRow?.plan ?? "free";
-    const isPaid = userPlan === "starter" || userPlan === "plus";
+    const isPaid = userPlan === "starter" || userPlan === "pro";
 
     // BLOCARE - doar daca nu e abonat
     if (!isPaid && freeUsed >= FREE_LIMIT) {
