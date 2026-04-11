@@ -86,7 +86,7 @@ export async function POST(req: Request) {
     if (!isPaid && freeUsed >= FREE_LIMIT) {
       const plan = body.plan ?? "starter";
       const priceId =
-        plan === "plus"
+        plan === "pro"
           ? process.env.STRIPE_PRICE_PRO
           : process.env.STRIPE_PRICE_STARTER;
       const session = await stripe.checkout.sessions.create({
