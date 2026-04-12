@@ -55,7 +55,7 @@ export async function POST(req: Request) {
       const session = await stripe.checkout.sessions.create({
         mode: "subscription",
         line_items: [{ price: priceId, quantity: 1 }],
-        success_url: (process.env.APP_URL || "") + "/success?uid=" + uid,
+        success_url: (process.env.APP_URL || "") + "/thank-you?plan=" + plan,
         cancel_url: process.env.APP_URL || "",
         metadata: { uid },
       });
@@ -92,7 +92,7 @@ export async function POST(req: Request) {
       const session = await stripe.checkout.sessions.create({
         mode: "subscription",
         line_items: [{ price: priceId, quantity: 1 }],
-        success_url: (process.env.APP_URL || "") + "/success?uid=" + uid,
+        success_url: (process.env.APP_URL || "") + "/thank-you?plan=" + plan,
         cancel_url: process.env.APP_URL || "",
         metadata: { uid },
       });
