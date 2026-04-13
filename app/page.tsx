@@ -165,7 +165,6 @@ export default function Home() {
               </div>
             </div>
           ))}
-            ))}
             {loading && (
               <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "12px 16px", background: "rgba(124,106,240,0.1)", border: "1px solid rgba(124,106,240,0.15)", borderRadius: 16, borderBottomLeftRadius: 4, maxWidth: "80px" }}>
                 {[0, 0.2, 0.4].map((delay, i) => (
