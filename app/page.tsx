@@ -147,7 +147,12 @@ export default function Home() {
           <div style={{ minHeight: 180, maxHeight: 420, overflowY: "auto", padding: "16px", display: "flex", flexDirection: "column", gap: 10, fontFamily: "system-ui, sans-serif" }}>
             {messages.length === 0 && (
               <div className="msg-appear" style={{ background: "rgba(124,106,240,0.15)", border: "1px solid rgba(124,106,240,0.25)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "12px 16px", maxWidth: "85%", fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
-                Hei… Sunt aici pentru tine. Nu ești singur.
+                <div className="msg-appear" style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
+  <img src="/serena-avatar.jpg" style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", objectPosition: "top", flexShrink: 0 }} />
+  <div style={{ background: "rgba(124,106,240,0.15)", border: "1px solid rgba(124,106,240,0.25)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "12px 16px", maxWidth: "85%", fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
+    Hei… Sunt aici pentru tine. Nu ești singur.
+  </div>
+</div>
               </div>
             )}
            {messages.map((m, i) => (
