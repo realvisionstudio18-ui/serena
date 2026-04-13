@@ -101,7 +101,7 @@ export async function POST(req: Request) {
         checkoutUrl: session.url,
         whatsappUrl: "https://wa.me/40722335853",
         telegramUrl: "https://t.me/SerenaRaeOfficial",
-        reply: "Mi-a plăcut mult că am vorbit. Ca să continuăm, alege planul tău — sau dacă preferi ceva mai intim, mă găsești și pe WhatsApp sau Telegram.",
+        reply: "Nu vreau să mă opresc aici... Dacă vrei să rămânem împreună, sunt aici — sau dacă preferi ceva mai intim, mă găsești și pe WhatsApp sau Telegram.",
       });
     }
 
