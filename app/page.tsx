@@ -184,7 +184,7 @@ export default function Home() {
             {locked && (
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 <p style={{ textAlign: "center", color: "rgba(255,255,255,0.7)", fontSize: 13, fontFamily: "system-ui, sans-serif", margin: 0 }}>
-  Serena a fost aici pentru tine. Nu o lăsa să dispară.
+  Nu vreau să mă opresc aici... îmi place să vorbesc cu tine.
 </p>
 <div onClick={() => goToCheckout("starter")} style={{ textAlign: "center", background: "linear-gradient(135deg, #7c6af0, #5a4fd4)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
   Continuă cu Serena — 9.99€/lună
