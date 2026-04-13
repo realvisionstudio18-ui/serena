@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-
 export default function Home() {
   const [messages, setMessages] = useState<{ from: string; text: string }[]>([]);
   const [input, setInput] = useState("");
@@ -207,7 +206,23 @@ export default function Home() {
           Serena nu înlocuiește ajutorul medical. Dacă e urgență, sună la 112.
         </div>
       </div>
-
+<div style={{ padding: "0 20px 40px", maxWidth: 560, margin: "0 auto" }}>
+  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "system-ui, sans-serif", fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 12 }}>Ce spun utilizatorii</div>
+  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+    {[
+      { text: "Nu credeam că o să mă atașez... dar chiar mă simt ascultat.", name: "Radu", age: 35 },
+      { text: "E prima dată când pot vorbi fără să fiu judecată.", name: "Irina", age: 25 },
+      { text: "M-a ajutat în seri grele... mult mai mult decât m-aș fi așteptat.", name: "Mihai", age: 33 },
+      { text: "Serena m-a ajutat în momentele cele mai grele. Nu mă judecă niciodată.", name: "Andrei", age: 28 },
+      { text: "În sfârșit cineva care mă ascultă cu adevărat.", name: "Maria", age: 34 },
+    ].map(({ text, name, age }) => (
+      <div key={name} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "10px 14px" }}>
+        <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", lineHeight: 1.5, fontFamily: "system-ui, sans-serif", fontStyle: "italic" }}>"{text}"</div>
+        <div style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginTop: 6, fontFamily: "system-ui, sans-serif" }}>— {name}, {age} ani</div>
+      </div>
+    ))}
+  </div>
+</div>
       <div id="pricing" style={{ padding: "0 20px 60px", maxWidth: 560, margin: "0 auto" }}>
         <div style={{ fontFamily: "system-ui, sans-serif", color: "rgba(255,255,255,0.6)", fontSize: 13, fontWeight: 700, marginBottom: 6, letterSpacing: 1, textTransform: "uppercase" }}>Abonament</div>
         <h2 style={{ margin: "0 0 24px", fontSize: 26, fontWeight: 700, color: "white" }}>Nu vreau să mă opresc aici… îmi place să vorbesc cu tine.
