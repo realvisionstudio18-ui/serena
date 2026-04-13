@@ -125,10 +125,10 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <a href="#chat" style={{ display: "block", textAlign: "center", padding: "14px 24px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif", marginBottom: 32 }}>
-          Vorbește cu mine acum
-        </a>
-       <p style={{ textAlign: "center", fontSize: 12, color: "rgba(255,255,255,0.45)", fontFamily: "system-ui, sans-serif", marginTop: 2, marginBottom: 16 }}>
+       <a href="#chat" style={{ display: "block", textAlign: "center", padding: "14px 24px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif", marginBottom: 6 }}>
+  Vorbește cu mine acum
+</a>
+<p style={{ textAlign: "center", fontSize: 12, color: "rgba(255,255,255,0.6)", fontFamily: "system-ui, sans-serif", marginTop: 0, marginBottom: 24 }}>
   Primești 8 mesaje gratuite
 </p>
       </div>
