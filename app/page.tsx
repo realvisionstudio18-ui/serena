@@ -207,7 +207,7 @@ export default function Home() {
         </div>
       </div>
 <div style={{ padding: "0 20px 40px", maxWidth: 560, margin: "0 auto" }}>
-  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "system-ui, sans-serif", fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 12 }}>Ce spun utilizatorii</div>
+  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "system-ui, sans-serif", fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 12 }}>Uite ce au simțit alții</div>
   <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
     {[
       { text: "Nu credeam că o să mă atașez... dar chiar mă simt ascultat.", name: "Radu", age: 35 },
