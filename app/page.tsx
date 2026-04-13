@@ -10,7 +10,6 @@ export default function Home() {
   const [locked, setLocked] = useState(false);
   const [checkoutUrl, setCheckoutUrl] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     let stored = localStorage.getItem("serena_uid");
     if (!stored) {
@@ -151,12 +150,16 @@ export default function Home() {
                 Hei… Sunt aici pentru tine. Nu ești singur.
               </div>
             )}
-            {messages.map((m, i) => (
-              <div key={i} className="msg-appear" style={{ display: "flex", justifyContent: m.from === "user" ? "flex-end" : "flex-start" }}>
-                <div style={{ background: m.from === "user" ? "linear-gradient(135deg, #7c6af0, #5a4fd4)" : "rgba(124,106,240,0.15)", border: m.from === "user" ? "none" : "1px solid rgba(124,106,240,0.2)", borderRadius: 16, borderBottomRightRadius: m.from === "user" ? 4 : 16, borderBottomLeftRadius: m.from === "serena" ? 4 : 16, padding: "10px 14px", maxWidth: "82%", fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,0.9)" }}>
-                  {m.text}
-                </div>
+           {messages.map((m, i) => (
+            <div key={i} className="msg-appear" style={{ display: "flex", justifyContent: m.from === "user" ? "flex-end" : "flex-start", alignItems: "flex-end", gap: 8 }}>
+              {m.from === "serena" && (
+                <img src="/serena-avatar.jpg" style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", objectPosition: "top", flexShrink: 0 }} />
+              )}
+              <div style={{ background: m.from === "user" ? "linear-gradient(135deg, #7c6af0, #5a4fd4)" : "rgba(124,106,240,0.15)", border: m.from === "user" ? "none" : "1px solid rgba(124,106,240,0.2)", borderRadius: 16, borderBottomRightRadius: m.from === "user" ? 4 : 16, borderBottomLeftRadius: m.from === "serena" ? 4 : 16, padding: "10px 14px", maxWidth: "82%", fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,0.9)" }}>
+                {m.text}
               </div>
+            </div>
+          ))}
             ))}
             {loading && (
               <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "12px 16px", background: "rgba(124,106,240,0.1)", border: "1px solid rgba(124,106,240,0.15)", borderRadius: 16, borderBottomLeftRadius: 4, maxWidth: "80px" }}>
