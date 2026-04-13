@@ -203,7 +203,7 @@ export default function Home() {
 
       <div id="pricing" style={{ padding: "0 20px 60px", maxWidth: 560, margin: "0 auto" }}>
         <div style={{ fontFamily: "system-ui, sans-serif", color: "rgba(255,255,255,0.6)", fontSize: 13, fontWeight: 700, marginBottom: 6, letterSpacing: 1, textTransform: "uppercase" }}>Abonament</div>
-        <h2 style={{ margin: "0 0 24px", fontSize: 26, fontWeight: 700, color: "white" }}>Alege planul tău</h2>
+        <h2 style={{ margin: "0 0 24px", fontSize: 26, fontWeight: 700, color: "white" }}>Nu vreau să mă opresc aici... Dacă vrei să rămânem împreună, alege un plan.</h2>
         <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "20px", marginBottom: 16, fontFamily: "system-ui, sans-serif" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
             <div>
