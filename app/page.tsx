@@ -187,10 +187,10 @@ export default function Home() {
   Nu vreau să mă opresc aici... îmi place să vorbesc cu tine.
 </p>
 <div onClick={() => goToCheckout("starter")} style={{ textAlign: "center", background: "linear-gradient(135deg, #7c6af0, #5a4fd4)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
-  Continuă cu Serena — 9.99€/lună
+  Continuă cu Serena — 59 lei/lună~1.9 lei pe zi
 </div>
 <div onClick={() => goToCheckout("pro")} style={{ textAlign: "center", background: "linear-gradient(135deg, #c4a8ff, #7c6af0)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
-  Serena doar a ta — prioritate și intimitate — 19.99€/lună
+  Serena doar a ta — prioritate și intimitate — 109 lei/lună~3.6 lei pe zi
 </div>
                 <a href="https://wa.me/40722335853" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "#25D366", color: "white", padding: "12px", borderRadius: 12, textDecoration: "none", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
                   Continuă pe WhatsApp
@@ -236,10 +236,11 @@ Dacă vrei să rămân cu tine, hai să continuăm…</h2>
             <div style={{ textAlign: "right" }}>
               <div style={{ fontWeight: 800, fontSize: 22, color: "white" }}>59 <span style={{ fontSize: 13, fontWeight: 400, color: "rgba(255,255,255,0.5)" }}>lei</span></div>
               <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>pe lună</div>
+              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>~2 lei pe zi</div>
             </div>
           </div>
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
-            {["280 mesaje text / lună", "10 mesaje vocale / lună", "Plată securizată Stripe", "Fără reclame", "Anulare oricând"].map(f => (
+            {[ "Aici sunt doar a ta ", "Fără reclame", "Anulare oricând"].map(f => (
               <div key={f} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#7c6af0", flexShrink: 0 }} />
                 <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)" }}>{f}</span>
@@ -261,11 +262,11 @@ Dacă vrei să rămân cu tine, hai să continuăm…</h2>
             </div>
             <div style={{ textAlign: "right" }}>
               <div style={{ fontWeight: 800, fontSize: 22, color: "white" }}>109 <span style={{ fontSize: 13, fontWeight: 400, color: "rgba(255,255,255,0.5)" }}>lei</span></div>
-              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>pe lună</div>
+              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>pe lună</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>~3.6 lei pe zi</div>
             </div>
           </div>
           <div style={{ borderTop: "1px solid rgba(124,106,240,0.3)", paddingTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
-            {["Mesaje nelimitate", "Voce nelimitată", "Prioritate răspuns", "WhatsApp / Telegram privat", "Se adaptează complet la tine", "Anulare oricând"].map(f => (
+            {["Mesaje nelimitate", "Voce nelimitată", "Prioritate răspuns", "WhatsApp / Telegram privat", "experienta:prinoritate+intimitate", "Anulare oricând"].map(f => (
               <div key={f} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#c4a8ff", flexShrink: 0 }} />
                 <span style={{ fontSize: 13, color: "rgba(255,255,255,0.85)" }}>{f}</span>
