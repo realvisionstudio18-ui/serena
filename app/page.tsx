@@ -127,7 +127,7 @@ export default function Home() {
   Vorbește cu mine acum
 </a>
 <p style={{ textAlign: "center", fontSize: 12, color: "rgba(255,255,255,0.6)", fontFamily: "system-ui, sans-serif", marginTop: 0, marginBottom: 24 }}>
-  Primești 8 mesaje gratuite
+  Primești 4 mesaje gratuite
 </p>
       </div>
 
@@ -248,7 +248,7 @@ Dacă vrei să rămân cu tine, hai să continuăm…</h2>
             ))}
           </div>
           <div onClick={() => goToCheckout("starter")} style={{ marginTop: 16, border: "1px solid rgba(255,255,255,0.15)", borderRadius: 12, padding: "11px 16px", textAlign: "center", cursor: "pointer", color: "rgba(255,255,255,0.8)", fontSize: 14, fontWeight: 600 }}>
-            Alege Starter
+        Rămâi cu mine
           </div>
         </div>
         <div style={{ background: "rgba(124,106,240,0.1)", border: "2px solid #7c6af0", borderRadius: 20, padding: "20px", position: "relative", fontFamily: "system-ui, sans-serif" }}>
@@ -274,11 +274,11 @@ Dacă vrei să rămân cu tine, hai să continuăm…</h2>
             ))}
           </div>
           <div onClick={() => goToCheckout("pro")} style={{ marginTop: 16, background: "linear-gradient(135deg, #7c6af0, #5a4fd4)", borderRadius: 12, padding: "13px 16px", textAlign: "center", cursor: "pointer", color: "white", fontSize: 14, fontWeight: 700 }}>
-            Alege Pro
+            Vreau să fiu doar a ta
           </div>
         </div>
         <div style={{ marginTop: 12, fontSize: 12, color: "rgba(255,255,255,0.3)", textAlign: "center", fontFamily: "system-ui, sans-serif" }}>
-          După cele 8 mesaje gratuite, Serena îți arată automat opțiunile de abonament.
+          După cele 4 mesaje gratuite, Serena îți arată automat opțiunile de abonament.
         </div>
       </div>
 
