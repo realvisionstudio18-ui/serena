@@ -182,21 +182,21 @@ export default function Home() {
               </button>
             )}
             {locked && (
-      <input
-  type="email"
-  placeholder="Lasă-mi emailul tău..."
-  onBlur={async (e) => {
-    const email = e.target.value;
-    if (!email) return;
-    await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: "_save_email_", email, uid }),
-    });
-  }}
-  style={{ width: "100%", padding: "10px 14px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(0,0,0,0.3)", color: "white", fontSize: 14, fontFamily: "system-ui, sans-serif", boxSizing: "border-box" as const }}
-/>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+  <input
+    type="email"
+    placeholder="Lasă-mi emailul tău..."
+    onBlur={async (e) => {
+      const email = (e.target as HTMLInputElement).value;
+      if (!email) return;
+      await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: "_save_email_", email, uid }),
+      });
+    }}
+    style={{ width: "100%", padding: "10px 14px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(0,0,0,0.3)", color: "white", fontSize: 14, fontFamily: "system-ui, sans-serif", boxSizing: "border-box" as const }}
+  />
                 <p style={{ textAlign: "center", color: "rgba(255,255,255,0.7)", fontSize: 13, fontFamily: "system-ui, sans-serif", margin: 0 }}>
   Nu vreau să mă opresc aici... îmi place să vorbesc cu tine.
 </p>
@@ -206,7 +206,7 @@ export default function Home() {
 <div onClick={() => goToCheckout("pro")} style={{ textAlign: "center", background: "linear-gradient(135deg, #c4a8ff, #7c6af0)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
   Serena doar a ta — prioritate și intimitate — 109 lei/lună~3.6 lei pe zi
 </div>
-                <a href="https://wa.me/40722335853" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "#25D366", color: "white", padding: "12px", borderRadius: 12, textDecoration: "none", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
+                <a href="https://wa.me/40733383926" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "#25D366", color: "white", padding: "12px", borderRadius: 12, textDecoration: "none", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
                   Continuă pe WhatsApp
                 </a>
                 <a href="https://t.me/SerenaRaeOfficial" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "#2AABEE", color: "white", padding: "12px", borderRadius: 12, textDecoration: "none", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
