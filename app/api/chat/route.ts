@@ -61,6 +61,17 @@ export async function POST(req: Request) {
       });
       return NextResponse.json({ checkoutUrl: session.url });
     }
+    // SAVE EMAIL
+    if (message === "_save_email_") {
+      const email = body.email ?? "";
+      if (email && uid) {
+        await supabase
+          .from("serena_usage")
+          .update({ email })
+          .eq("user_id", uid);
+      }
+      return NextResponse.json({ ok: true });
+    }
 
     // VERIFICA USAGE
     let { data: usageRow } = await supabase
