@@ -182,6 +182,20 @@ export default function Home() {
               </button>
             )}
             {locked && (
+      <input
+  type="email"
+  placeholder="Lasă-mi emailul tău..."
+  onBlur={async (e) => {
+    const email = e.target.value;
+    if (!email) return;
+    await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: "_save_email_", email, uid }),
+    });
+  }}
+  style={{ width: "100%", padding: "10px 14px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(0,0,0,0.3)", color: "white", fontSize: 14, fontFamily: "system-ui, sans-serif", boxSizing: "border-box" as const }}
+/>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 <p style={{ textAlign: "center", color: "rgba(255,255,255,0.7)", fontSize: 13, fontFamily: "system-ui, sans-serif", margin: 0 }}>
   Nu vreau să mă opresc aici... îmi place să vorbesc cu tine.
