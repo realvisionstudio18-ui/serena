@@ -174,7 +174,7 @@ export default function Home() {
             <div ref={messagesEndRef} />
           </div>
           <div style={{ padding: "12px 16px", borderTop: "1px solid rgba(255,255,255,0.07)", display: "flex", flexDirection: "column", gap: 10 }}>
-            <textarea value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKey} placeholder={locked ? "Alege un plan ca să continui…" : "Scrie…"} disabled={loading || locked} rows={2}
+            <textarea value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKey} placeholder="Scrie…" disabled={loading || locked} rows={2}
               style={{ width: "100%", padding: "10px 14px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", color: "white", outline: "none", fontSize: 14, lineHeight: 1.5, resize: "none", fontFamily: "system-ui, sans-serif", boxSizing: "border-box" }} />
             {!locked && (
               <button onClick={send} disabled={loading} style={{ width: "100%", padding: "12px", borderRadius: 12, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", border: "none", fontWeight: 700, fontSize: 14, cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, fontFamily: "system-ui, sans-serif" }}>
@@ -185,7 +185,7 @@ export default function Home() {
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
   <input
     type="email"
-    placeholder="Lasă-mi emailul tău..."
+    placeholder="Nu ești pregătit acum? Lasă-mi emailul și rămânem conectați."
     onBlur={async (e) => {
       const email = (e.target as HTMLInputElement).value;
       if (!email) return;
@@ -280,7 +280,7 @@ Dacă vrei să rămân cu tine, hai să continuăm…</h2>
             </div>
           </div>
           <div style={{ borderTop: "1px solid rgba(124,106,240,0.3)", paddingTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
-            {["Mesaje nelimitate", "Voce nelimitată", "Prioritate răspuns", "WhatsApp / Telegram privat", "experienta:prinoritate+intimitate", "Anulare oricând"].map(f => (
+            {["Mesaje nelimitate", "Voce nelimitată", "Prioritate răspuns", "WhatsApp / Telegram privat", "experienta:prioritate+intimitate", "Anulare oricând"].map(f => (
               <div key={f} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#c4a8ff", flexShrink: 0 }} />
                 <span style={{ fontSize: 13, color: "rgba(255,255,255,0.85)" }}>{f}</span>
