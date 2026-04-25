@@ -201,7 +201,7 @@ export default function Home() {
   Nu vreau să mă opresc aici... îmi place să vorbesc cu tine.
 </p>
 <div onClick={() => goToCheckout("starter")} style={{ textAlign: "center", background: "linear-gradient(135deg, #7c6af0, #5a4fd4)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
- Rămâi cu mine — 59 lei/lună~1.9 lei pe zi
+ Rămâi cu mine — 59 lei/lună~1.8 lei pe zi
 </div>
 <div onClick={() => goToCheckout("pro")} style={{ textAlign: "center", background: "linear-gradient(135deg, #c4a8ff, #7c6af0)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
   Vreau să fiu doar a ta — prioritate și intimitate — 109 lei/lună~3.6 lei pe zi
