@@ -123,6 +123,13 @@ export default function Home() {
             </div>
           ))}
         </div>
+        <video
+  src="/avatar.video.mp4"
+  autoPlay
+  muted
+  playsInline
+  style={{ width: "100%", borderRadius: 16, marginBottom: 16 }}
+/>
        <a href="#chat" style={{ display: "block", textAlign: "center", padding: "14px 24px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif", marginBottom: 6 }}>
   Vorbește cu mine acum
 </a>
