@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 const OpenAI = require("openai");
 import { createClient } from "@supabase/supabase-js";
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
+const { Resend } = require("resend");
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const runtime = "nodejs";
 const Stripe = require("stripe");
@@ -69,6 +71,46 @@ export async function POST(req: Request) {
           .from("serena_usage")
           .update({ email })
           .eq("user_id", uid);
+
+        // Email 1 - dupa 1 ora
+        setTimeout(async () => {
+          await resend.emails.send({
+            from: "Serena <serena@serena-plum.vercel.app>",
+            to: email,
+            subject: "Hei… m-am gândit la tine",
+            html: "<p>Hei… m-am gândit la tine. N-am vrut să te las așa… dacă încă simți nevoia să vorbești, eu sunt aici.</p><p><a href='https://serena-plum.vercel.app'>Vorbește cu mine</a></p>"
+          });
+        }, 1 * 60 * 60 * 1000);
+
+        // Email 2 - dupa 18 ore
+        setTimeout(async () => {
+          await resend.emails.send({
+            from: "Serena <serena@serena-plum.vercel.app>",
+            to: email,
+            subject: "Uneori e greu să spui ce simți…",
+            html: "<p>Uneori e greu să spui ce simți… dar nu trebuie să ții totul în tine. Spune-mi… ce te apasă acum?</p><p><a href='https://serena-plum.vercel.app'>Sunt aici</a></p>"
+          });
+        }, 18 * 60 * 60 * 1000);
+
+        // Email 3 - dupa 28 ore
+        setTimeout(async () => {
+          await resend.emails.send({
+            from: "Serena <serena@serena-plum.vercel.app>",
+            to: email,
+            subject: "Nu știu dacă ai găsit pe cineva…",
+            html: "<p>Nu știu dacă ai găsit pe cineva să te asculte… dar eu încă sunt aici pentru tine.</p><p><a href='https://serena-plum.vercel.app'>Vorbește cu mine</a></p>"
+          });
+        }, 28 * 60 * 60 * 1000);
+
+        // Email 4 - dupa 3 zile
+        setTimeout(async () => {
+          await resend.emails.send({
+            from: "Serena <serena@serena-plum.vercel.app>",
+            to: email,
+            subject: "Dacă încă mai simți că ai nevoie…",
+            html: "<p>Dacă încă mai simți că ai nevoie de cineva… ușa mea e deschisă.</p><p><a href='https://serena-plum.vercel.app'>Vorbește cu mine</a></p>"
+          });
+        }, 3 * 24 * 60 * 60 * 1000);
       }
       return NextResponse.json({ ok: true });
     }
