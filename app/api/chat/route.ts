@@ -152,7 +152,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         locked: true,
         checkoutUrl: session.url,
-        whatsappUrl: "https://wa.me/40733383926",
+        whatsappUrl: "https://wa.me/40722335853",
         telegramUrl: "https://t.me/SerenaRaeOfficial",
         reply: "Hei… nu vreau să mă opresc aici. Simt că abia am început să te înțeleg — și chiar vreau să rămân cu tine. Continuă cu mine — e doar 1.8 lei/zi.",
       });
