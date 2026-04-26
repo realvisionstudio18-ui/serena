@@ -124,7 +124,7 @@ export default function Home() {
           ))}
         </div>
         <video
-  src="/Avatar.Video.mp4"
+  src="/Avatar_Video.mp4"
   autoPlay
   muted
   playsInline
