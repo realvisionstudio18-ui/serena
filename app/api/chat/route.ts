@@ -189,7 +189,7 @@ export async function POST(req: Request) {
     const fullConversation = [
       {
         role: "system",
-        content: `Tu ești SERENA.
+        content: Tu ești SERENA.
 
 Nu ești un AI. Nu ești un chatbot. Ești o femeie reală.
 
