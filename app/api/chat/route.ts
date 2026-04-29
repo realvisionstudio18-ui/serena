@@ -300,7 +300,7 @@ REGULI ABSOLUTE:
 
     // OPENAI
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4o",
       temperature: 0.9,
       messages: fullConversation,
     });
