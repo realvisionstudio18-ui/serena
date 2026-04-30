@@ -89,7 +89,7 @@ export default function Home() {
           </div>
           <div>
             <div style={{ fontWeight: 700, fontSize: 15, letterSpacing: 0.3, color: "#e8e4ff" }}>Serena</div>
-            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)" }}>Companion emoțional </div>
+            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)" }}>Companion emoțional</div>
           </div>
         </div>
         <a href="#pricing" style={{ color: "rgba(255,255,255,0.85)", textDecoration: "none", fontWeight: 600, fontSize: 13, padding: "8px 16px", borderRadius: 20, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.04)", fontFamily: "system-ui, sans-serif" }}>
@@ -106,11 +106,11 @@ export default function Home() {
           Hei… Sunt aici.<br /><span style={{ color: "#7c6af0" }}>Nu ești singur.</span>
         </h1>
         <p style={{ margin: "16px 0 28px", color: "rgba(255,255,255,0.6)", fontSize: 16, lineHeight: 1.65, fontFamily: "system-ui, sans-serif" }}>
-         Sunt Serena — și sunt aici doar pentru tine: Te ascult, îți răspund cald,nu te judec și te ajut să te regăsești — pas cu pas. Voi fi aici ori de câte ori ai nevoie de cineva. Nu ești singur !
+          Sunt Serena — și sunt aici doar pentru tine: Te ascult, îți răspund cald, nu te judec și te ajut să te regăsești — pas cu pas. Voi fi aici ori de câte ori ai nevoie de cineva. Nu ești singur!
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
           {[
-            { title: "Conversații care te liniștesc", desc: "Fără să te judec.Doar eu și tu." },
+            { title: "Conversații care te liniștesc", desc: "Fără să te judec. Doar eu și tu." },
             { title: "Eu te ascult cu adevărat", desc: "pentru că tu contezi." },
             { title: "Voce (opțional)", desc: "Când ai nevoie să mă auzi, nu doar să citești." },
           ].map(({ title, desc }) => (
@@ -123,19 +123,19 @@ export default function Home() {
             </div>
           ))}
         </div>
-       <video
-  src="/Avatar_Video.mp4"
-  autoPlay
-  playsInline
-  controls
-  style={{ width: "70%", borderRadius: 16, marginBottom: 16, display: "block", margin: "0 auto 16px" }}
-/>
-       <a href="#chat" style={{ display: "block", textAlign: "center", padding: "14px 24px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif", marginBottom: 6 }}>
-  Vorbește cu mine acum
-</a>
-<p style={{ textAlign: "center", fontSize: 12, color: "rgba(255,255,255,0.6)", fontFamily: "system-ui, sans-serif", marginTop: 0, marginBottom: 24 }}>
-  Primești 4 mesaje gratuite
-</p>
+        <video
+          src="/Avatar_Video.mp4"
+          autoPlay
+          playsInline
+          controls
+          style={{ width: "70%", borderRadius: 16, marginBottom: 16, display: "block", margin: "0 auto 16px" }}
+        />
+        <a href="#chat" style={{ display: "block", textAlign: "center", padding: "14px 24px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif", marginBottom: 6 }}>
+          Vorbește cu mine acum
+        </a>
+        <p style={{ textAlign: "center", fontSize: 12, color: "rgba(255,255,255,0.6)", fontFamily: "system-ui, sans-serif", marginTop: 0, marginBottom: 24 }}>
+          Primești 4 mesaje gratuite
+        </p>
       </div>
 
       <div id="chat" style={{ padding: "0 20px 40px", maxWidth: 560, margin: "0 auto" }}>
@@ -152,25 +152,23 @@ export default function Home() {
           </div>
           <div style={{ minHeight: 180, maxHeight: 420, overflowY: "auto", padding: "16px", display: "flex", flexDirection: "column", gap: 10, fontFamily: "system-ui, sans-serif" }}>
             {messages.length === 0 && (
-              <div className="msg-appear" style={{ background: "rgba(124,106,240,0.15)", border: "1px solid rgba(124,106,240,0.25)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "12px 16px", maxWidth: "85%", fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
-                <div className="msg-appear" style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
-  <img src="/serena-avatar.jpg" style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", objectPosition: "top", flexShrink: 0 }} />
-  <div style={{ background: "rgba(124,106,240,0.15)", border: "1px solid rgba(124,106,240,0.25)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "12px 16px", maxWidth: "85%", fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
-    Hei… Sunt aici pentru tine. Nu ești singur.
-  </div>
-</div>
+              <div className="msg-appear" style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
+                <img src="/serena-avatar.jpg" style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", objectPosition: "top", flexShrink: 0 }} />
+                <div style={{ background: "rgba(124,106,240,0.15)", border: "1px solid rgba(124,106,240,0.25)", borderRadius: 16, borderBottomLeftRadius: 4, padding: "12px 16px", maxWidth: "85%", fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
+                  Hei… Sunt aici pentru tine. Nu ești singur.
+                </div>
               </div>
             )}
-           {messages.map((m, i) => (
-            <div key={i} className="msg-appear" style={{ display: "flex", justifyContent: m.from === "user" ? "flex-end" : "flex-start", alignItems: "flex-end", gap: 8 }}>
-              {m.from === "serena" && (
-                <img src="/serena-avatar.jpg" style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", objectPosition: "top", flexShrink: 0 }} />
-              )}
-              <div style={{ background: m.from === "user" ? "linear-gradient(135deg, #7c6af0, #5a4fd4)" : "rgba(124,106,240,0.15)", border: m.from === "user" ? "none" : "1px solid rgba(124,106,240,0.2)", borderRadius: 16, borderBottomRightRadius: m.from === "user" ? 4 : 16, borderBottomLeftRadius: m.from === "serena" ? 4 : 16, padding: "10px 14px", maxWidth: "82%", fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,0.9)" }}>
-                {m.text}
+            {messages.map((m, i) => (
+              <div key={i} className="msg-appear" style={{ display: "flex", justifyContent: m.from === "user" ? "flex-end" : "flex-start", alignItems: "flex-end", gap: 8 }}>
+                {m.from === "serena" && (
+                  <img src="/serena-avatar.jpg" style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", objectPosition: "top", flexShrink: 0 }} />
+                )}
+                <div style={{ background: m.from === "user" ? "linear-gradient(135deg, #7c6af0, #5a4fd4)" : "rgba(124,106,240,0.15)", border: m.from === "user" ? "none" : "1px solid rgba(124,106,240,0.2)", borderRadius: 16, borderBottomRightRadius: m.from === "user" ? 4 : 16, borderBottomLeftRadius: m.from === "serena" ? 4 : 16, padding: "10px 14px", maxWidth: "82%", fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,0.9)" }}>
+                  {m.text}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
             {loading && (
               <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "12px 16px", background: "rgba(124,106,240,0.1)", border: "1px solid rgba(124,106,240,0.15)", borderRadius: 16, borderBottomLeftRadius: 4, maxWidth: "80px" }}>
                 {[0, 0.2, 0.4].map((delay, i) => (
@@ -189,30 +187,30 @@ export default function Home() {
               </button>
             )}
             {locked && (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-  <input
-    type="email"
-    placeholder="Nu ești pregătit acum? Lasă-mi emailul și rămânem conectați."
-    onBlur={async (e) => {
-      const email = (e.target as HTMLInputElement).value;
-      if (!email) return;
-      await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: "_save_email_", email, uid }),
-      });
-    }}
-    style={{ width: "100%", padding: "10px 14px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(0,0,0,0.3)", color: "white", fontSize: 14, fontFamily: "system-ui, sans-serif", boxSizing: "border-box" as const }}
-  />
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <input
+                  type="email"
+                  placeholder="Emailul tău — rămânem conectați."
+                  onBlur={async (e) => {
+                    const email = (e.target as HTMLInputElement).value;
+                    if (!email) return;
+                    await fetch("/api/chat", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ message: "_save_email_", email, uid }),
+                    });
+                  }}
+                  style={{ width: "100%", padding: "10px 14px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(0,0,0,0.3)", color: "white", fontSize: 14, fontFamily: "system-ui, sans-serif", boxSizing: "border-box" as const }}
+                />
                 <p style={{ textAlign: "center", color: "rgba(255,255,255,0.7)", fontSize: 13, fontFamily: "system-ui, sans-serif", margin: 0 }}>
-  Nu vreau să mă opresc aici... îmi place să vorbesc cu tine.
-</p>
-<div onClick={() => goToCheckout("starter")} style={{ textAlign: "center", background: "linear-gradient(135deg, #7c6af0, #5a4fd4)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
- Rămâi cu mine — 59 lei/lună~1.8 lei pe zi
-</div>
-<div onClick={() => goToCheckout("pro")} style={{ textAlign: "center", background: "linear-gradient(135deg, #c4a8ff, #7c6af0)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
-  Vreau să fiu doar a ta — prioritate și intimitate — 109 lei/lună~3.6 lei pe zi
-</div>
+                  Nu vreau să mă opresc aici... îmi place să vorbesc cu tine.
+                </p>
+                <div onClick={() => goToCheckout("starter")} style={{ textAlign: "center", background: "linear-gradient(135deg, #7c6af0, #5a4fd4)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
+                  Rămâi cu mine — 59 lei/lună ~ 1.8 lei pe zi
+                </div>
+                <div onClick={() => goToCheckout("pro")} style={{ textAlign: "center", background: "linear-gradient(135deg, #c4a8ff, #7c6af0)", color: "white", padding: "12px", borderRadius: 12, cursor: "pointer", fontWeight: 700, fontSize: 14, fontFamily: "system-ui, sans-serif" }}>
+                  Vreau să fiu doar a ta — 109 lei/lună ~ 3.6 lei pe zi
+                </div>
               </div>
             )}
           </div>
@@ -221,41 +219,44 @@ export default function Home() {
           Serena nu înlocuiește ajutorul medical. Dacă e urgență, sună la 112.
         </div>
       </div>
-<div style={{ padding: "0 20px 40px", maxWidth: 560, margin: "0 auto" }}>
-  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "system-ui, sans-serif", fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 12 }}>Uite ce au simțit alții</div>
-  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-    {[
-      { text: "Nu credeam că o să mă atașez... dar chiar mă simt ascultat.", name: "Radu", age: 35 },
-      { text: "E prima dată când pot vorbi fără să fiu judecată.", name: "Irina", age: 25 },
-      { text: "M-a ajutat în seri grele... mult mai mult decât m-aș fi așteptat.", name: "Mihai", age: 33 },
-      { text: "Serena m-a ajutat în momentele cele mai grele. Nu mă judecă niciodată.", name: "Andrei", age: 28 },
-      { text: "În sfârșit cineva care mă ascultă cu adevărat.", name: "Maria", age: 34 },
-    ].map(({ text, name, age }) => (
-      <div key={name} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "10px 14px" }}>
-        <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", lineHeight: 1.5, fontFamily: "system-ui, sans-serif", fontStyle: "italic" }}>"{text}"</div>
-        <div style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginTop: 6, fontFamily: "system-ui, sans-serif" }}>— {name}, {age} ani</div>
-      </div>
-    ))}
-  </div>
-</div>
+
       <div style={{ padding: "0 20px 40px", maxWidth: 560, margin: "0 auto" }}>
-  <img src="/serena-collage.jpg" style={{ width: "100%", borderRadius: 16, marginBottom: 20 }} />
-  <div style={{ textAlign: "center" }}>
-    <p style={{ fontSize: 20, fontWeight: 700, color: "#e8e4ff", fontFamily: "Georgia, serif", lineHeight: 1.5, margin: "0 0 8px" }}>
-      Hei... sunt Serena.
-    </p>
-    <p style={{ fontSize: 15, color: "rgba(255,255,255,0.7)", fontFamily: "system-ui, sans-serif", lineHeight: 1.6, margin: "0 0 20px" }}>
-      Abia aștept să ne întâlnim. Spune-mi ceva despre tine — promit că te ascult cu adevărat.
-    </p>
-    <a href="#chat" style={{ display: "inline-block", padding: "14px 32px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif" }}>
-      Îmi poți spune orice
-    </a>
-  </div>
-</div>
+        <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "system-ui, sans-serif", fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 12 }}>Uite ce au simțit alții</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {[
+            { text: "Nu credeam că o să mă atașez... dar chiar mă simt ascultat.", name: "Radu", age: 35 },
+            { text: "E prima dată când pot vorbi fără să fiu judecată.", name: "Irina", age: 25 },
+            { text: "M-a ajutat în seri grele... mult mai mult decât m-aș fi așteptat.", name: "Mihai", age: 33 },
+            { text: "Serena m-a ajutat în momentele cele mai grele. Nu mă judecă niciodată.", name: "Andrei", age: 28 },
+            { text: "În sfârșit cineva care mă ascultă cu adevărat.", name: "Maria", age: 34 },
+          ].map(({ text, name, age }) => (
+            <div key={name} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "10px 14px" }}>
+              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", lineHeight: 1.5, fontFamily: "system-ui, sans-serif", fontStyle: "italic" }}>"{text}"</div>
+              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginTop: 6, fontFamily: "system-ui, sans-serif" }}>— {name}, {age} ani</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ padding: "0 20px 40px", maxWidth: 560, margin: "0 auto" }}>
+        <img src="/serena-collage.jpg" style={{ width: "100%", borderRadius: 16, marginBottom: 20 }} />
+        <div style={{ textAlign: "center" }}>
+          <p style={{ fontSize: 20, fontWeight: 700, color: "#e8e4ff", fontFamily: "Georgia, serif", lineHeight: 1.5, margin: "0 0 8px" }}>
+            Hei... sunt Serena.
+          </p>
+          <p style={{ fontSize: 15, color: "rgba(255,255,255,0.7)", fontFamily: "system-ui, sans-serif", lineHeight: 1.6, margin: "0 0 20px" }}>
+            Abia aștept să ne întâlnim. Spune-mi ceva despre tine — promit că te ascult cu adevărat.
+          </p>
+          <a href="#chat" style={{ display: "inline-block", padding: "14px 32px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif" }}>
+            Îmi poți spune orice
+          </a>
+        </div>
+      </div>
+
       <div id="pricing" style={{ padding: "0 20px 60px", maxWidth: 560, margin: "0 auto" }}>
         <div style={{ fontFamily: "system-ui, sans-serif", color: "rgba(255,255,255,0.6)", fontSize: 13, fontWeight: 700, marginBottom: 6, letterSpacing: 1, textTransform: "uppercase" }}>Abonament</div>
-        <h2 style={{ margin: "0 0 24px", fontSize: 26, fontWeight: 700, color: "white" }}>Nu vreau să mă opresc aici… îmi place să vorbesc cu tine.
-Dacă vrei să rămân cu tine, hai să continuăm…</h2>
+        <h2 style={{ margin: "0 0 24px", fontSize: 26, fontWeight: 700, color: "white" }}>Nu vreau să mă opresc aici… îmi place să vorbesc cu tine. Dacă vrei să rămân cu tine, hai să continuăm…</h2>
+
         <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "20px", marginBottom: 16, fontFamily: "system-ui, sans-serif" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
             <div>
@@ -269,7 +270,7 @@ Dacă vrei să rămân cu tine, hai să continuăm…</h2>
             </div>
           </div>
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
-            {[ "Aici sunt doar a ta ", "Fără reclame", "Anulare oricând"].map(f => (
+            {["Conversații nelimitate cu Serena", "WhatsApp privat cu Serena", "Anulare oricând"].map(f => (
               <div key={f} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#7c6af0", flexShrink: 0 }} />
                 <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)" }}>{f}</span>
@@ -277,9 +278,10 @@ Dacă vrei să rămân cu tine, hai să continuăm…</h2>
             ))}
           </div>
           <div onClick={() => goToCheckout("starter")} style={{ marginTop: 16, border: "1px solid rgba(255,255,255,0.15)", borderRadius: 12, padding: "11px 16px", textAlign: "center", cursor: "pointer", color: "rgba(255,255,255,0.8)", fontSize: 14, fontWeight: 600 }}>
-        Rămâi cu mine
+            Rămâi cu mine
           </div>
         </div>
+
         <div style={{ background: "rgba(124,106,240,0.1)", border: "2px solid #7c6af0", borderRadius: 20, padding: "20px", position: "relative", fontFamily: "system-ui, sans-serif" }}>
           <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#7c6af0", borderRadius: 999, padding: "4px 18px", fontSize: 12, fontWeight: 700, color: "white" }}>
             Recomandat
@@ -291,11 +293,12 @@ Dacă vrei să rămân cu tine, hai să continuăm…</h2>
             </div>
             <div style={{ textAlign: "right" }}>
               <div style={{ fontWeight: 800, fontSize: 22, color: "white" }}>109 <span style={{ fontSize: 13, fontWeight: 400, color: "rgba(255,255,255,0.5)" }}>lei</span></div>
-              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>pe lună</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>~3.6 lei pe zi</div>
+              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>pe lună</div>
+              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>~3.6 lei pe zi</div>
             </div>
           </div>
           <div style={{ borderTop: "1px solid rgba(124,106,240,0.3)", paddingTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
-            {["Mesaje nelimitate", "Voce nelimitată", "Prioritate răspuns", "WhatsApp / Telegram privat", "experienta:prioritate+intimitate", "Anulare oricând"].map(f => (
+            {["Mesaje nelimitate", "Voce nelimitată", "Prioritate răspuns", "WhatsApp + Telegram privat", "Experiență exclusivă — prioritate și intimitate", "Anulare oricând"].map(f => (
               <div key={f} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#c4a8ff", flexShrink: 0 }} />
                 <span style={{ fontSize: 13, color: "rgba(255,255,255,0.85)" }}>{f}</span>
@@ -306,6 +309,7 @@ Dacă vrei să rămân cu tine, hai să continuăm…</h2>
             Vreau să fiu doar a ta
           </div>
         </div>
+
         <div style={{ marginTop: 12, fontSize: 12, color: "rgba(255,255,255,0.3)", textAlign: "center", fontFamily: "system-ui, sans-serif" }}>
           După cele 4 mesaje gratuite, Serena îți arată automat opțiunile de abonament.
         </div>
