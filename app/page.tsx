@@ -238,6 +238,20 @@ export default function Home() {
     ))}
   </div>
 </div>
+      <div style={{ padding: "0 20px 40px", maxWidth: 560, margin: "0 auto" }}>
+  <img src="/serena-collage.jpg" style={{ width: "100%", borderRadius: 16, marginBottom: 20 }} />
+  <div style={{ textAlign: "center" }}>
+    <p style={{ fontSize: 20, fontWeight: 700, color: "#e8e4ff", fontFamily: "Georgia, serif", lineHeight: 1.5, margin: "0 0 8px" }}>
+      Hei... sunt Serena.
+    </p>
+    <p style={{ fontSize: 15, color: "rgba(255,255,255,0.7)", fontFamily: "system-ui, sans-serif", lineHeight: 1.6, margin: "0 0 20px" }}>
+      Abia aștept să ne întâlnim. Spune-mi ceva despre tine — promit că te ascult cu adevărat.
+    </p>
+    <a href="#chat" style={{ display: "inline-block", padding: "14px 32px", borderRadius: 14, background: "linear-gradient(135deg, #7c6af0, #22c55e)", color: "white", textDecoration: "none", fontWeight: 700, fontSize: 15, fontFamily: "system-ui, sans-serif" }}>
+      Îmi poți spune orice
+    </a>
+  </div>
+</div>
       <div id="pricing" style={{ padding: "0 20px 60px", maxWidth: 560, margin: "0 auto" }}>
         <div style={{ fontFamily: "system-ui, sans-serif", color: "rgba(255,255,255,0.6)", fontSize: 13, fontWeight: 700, marginBottom: 6, letterSpacing: 1, textTransform: "uppercase" }}>Abonament</div>
         <h2 style={{ margin: "0 0 24px", fontSize: 26, fontWeight: 700, color: "white" }}>Nu vreau să mă opresc aici… îmi place să vorbesc cu tine.
