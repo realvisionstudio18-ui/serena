@@ -23,7 +23,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-const FREE_LIMIT = 4;
+const FREE_LIMIT = 3;
 
 async function elevenTTS(text: string) {
   const audio = await eleven.textToSpeech.convert("466mxyM3Jc9uZhiqUKRn", {
